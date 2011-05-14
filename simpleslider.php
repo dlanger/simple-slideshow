@@ -6,7 +6,7 @@ Description: A basic image slider. Attach images to a post, and then use a short
 Version: 1.0
 Author: Daniel Langer
 Author URI: http://www.daniellanger.me
-License: X11 
+License: BSD
 */
 
 define("SIMPLESLIDER_VERSION", "1.0");
@@ -37,6 +37,8 @@ function list_images_handler( $atts ) {
 		'link_to' => 'direct'
 		), $atts ) );
 	
+	// @TODO - Why does this go to hell when "size" is something not "medium"?	
+		
 	// @TODO - Somethign to make sure that the value for 'size' is an appropriate string	
 		
 	$images =& get_children( 'post_type=attachment&post_mime_type=' .
@@ -54,32 +56,57 @@ function list_images_handler( $atts ) {
 	
 	$slider_show_id = 'simpleslider_show_' . get_the_ID();
 	
-	// @TODO - Click triggers as described on Cycle Lite site 
+	// JS to set up the Cycle for this instance
+	$resp .= '<script>' .
+				'$(document).ready(function(){$(\'#' . $slider_show_id . 
+				'\').cycle({timeout: 0, speed: 500, next: \'#' . 
+				$slider_show_id . '_next\', prev: \'#' . $slider_show_id .
+				'_prev\'}); ' .
+				'$(\'#' . $slider_show_id. ' > a > img\').' .
+				'removeAttr(\'title\'); ' .
+				'$(\'#' . $slider_show_id . 
+				' > div\').css(\'display\', \'block\');});';
+	$resp .= '</script>' . "\n";
 	
-	$resp .= '<script>$(document).ready(function(){$(\'#' . $slider_show_id . 
-				'\').cycle({speed: 500}); $(\'#' . $slider_show_id 
-				. ' > a > img\').removeAttr(\'title\')});</script>' . "\n";
+	// Sliding DIV
 	$resp .= '<div class="simpleslider_show" id="' . $slider_show_id . '" ' . 
 				'style="height: ' . $thumb_h . 'px; width: ' .
-				$thumb_w . 'px; margin: 10px auto">' . "\n";
-
+				$thumb_w . 'px; margin: 10px auto;">' . "\n";
+	
+	$first = true;
 	foreach ( $images as $image_id => $image_data ) {
-		$pre_image = '';
+		// To prevent flash of unstyled content - JS in the document.ready
+		// handler will remove this (because Cycle Lite can't deal with it)
+		// once Cycle Lite has set all the opacities.
+		$pre_image = $first ? 
+						'<div style="display: block">' : 
+						'<div style="display: none">'; 
 		$post_image = '';
-		
+		$first = false;
+				
 		if ( true == $link_click ){
-			$post_image = "</a>\n";
+			$post_image .= "</a>";
 			if( 'direct' == $link_to )
-				$pre_image = '<a href="' . wp_get_attachment_url( $image_id ) . '" target="_new">';
+				$pre_image .= '<a href="' . wp_get_attachment_url( $image_id ) . '" target="_new">';
 			else 
-				$pre_image = '<a href="' . get_attachment_link( $image_id ) . '" target="_new">';
+				$pre_image .= '<a href="' . get_attachment_link( $image_id ) . '" target="_new">';
 		}
 		
+		$post_image .= "</div>\n";
 		$resp .= $pre_image . wp_get_attachment_image( $image_id, $size) . $post_image;
 	}	
 	
-	$resp .= '</div>';
+	// Sliding DIV
+	$resp .= '</div>' . "\n";
 	
+	// Controls
+	$resp .= '<div style="width: ' . $thumb_w . 'px; margin: 10px auto; ' .
+				'text-align: center">';
+	$resp .= '<a href="#" id="' . $slider_show_id . '_prev">prev</a> &nbsp;' .
+				'&nbsp; <a href="#" id="' . $slider_show_id . 
+				'_next">next</a>';
+	$resp .= '</div>' . "\n";
+
 	return $resp;
 }
 
