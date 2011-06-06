@@ -27,6 +27,9 @@ function load_js() {
 	wp_register_script( 'mini_cycle', plugins_url( 
 		'jquery.cycle.lite.1.1.min.js', __FILE__ ), array( 'jquery' ), 
 		'1.1', false );
+	wp_register_script( 'simpleslider', plugins_url( 
+		'simpleslider.js', __FILE__ ), false, 1.0, false); 
+	wp_enqueue_script( 'simpleslider' );		
 	wp_enqueue_script( 'jquery' );
 	wp_enqueue_script( 'mini_cycle' );
 }
@@ -34,14 +37,10 @@ function load_js() {
 function list_images_handler( $atts ) {
 	extract( shortcode_atts( array( 
 		'size' => 'medium',
-		'link_click' => true,
-		'link_to' => 'direct'
+		'link_click' => 1,
+		'link_to' => 'attach',
+		'show_counter' => 1
 		), $atts ) );
-		
-	// If the size specified in the argument to the shortcode isn't one 
-	// WordPress recognizes, default to the 'medium' size.	
-	if ( ! in_array($size, get_intermediate_image_sizes(), true))
-		$size = 'medium';	
 		
 	$images =& get_children( 'post_type=attachment&post_mime_type=' .
 								'image&post_parent=' . get_the_ID() ); 	
@@ -51,6 +50,11 @@ function list_images_handler( $atts ) {
 	if( empty($images) ) {
 		return '';
 	}
+
+	// If the size specified in the argument to the shortcode isn't one 
+	// WordPress recognizes, default to the 'medium' size.	
+	if ( ! in_array($size, get_intermediate_image_sizes(), true))
+		$size = 'medium';	
 	
 	// Figure out the maximum size of the images being displayed so we can 
 	// set the smallest possible fixed-size container to Cycle in.
@@ -69,10 +73,13 @@ function list_images_handler( $atts ) {
 				'\').cycle({timeout: 0, speed: 500, next: \'#' . 
 				$slider_show_id . '_next\', prev: \'#' . $slider_show_id .
 				'_prev\'}); ' .
-				'$(\'#' . $slider_show_id. ' > a > img\').' .
+				'$(\'#' . $slider_show_id. ' > div > a > img\').' .
 				'removeAttr(\'title\'); ' .
-				'$(\'#' . $slider_show_id . 
-				' > div\').css(\'display\', \'block\');});';
+				'$(\'#' . $slider_show_id . ' > div\').' . 
+				'css(\'display\', \'block\');' .
+				'$(\'#' . $slider_show_id. ' > div > a, #' . $slider_show_id .
+				'_prev, #' . $slider_show_id. '_next\').' .
+				'css(\'outline\', \'none\');});';
 	$resp .= '</script>' . "\n";
 	
 	$resp .= '<div class="simpleslider_show" id="' . $slider_show_id . '" ' . 
@@ -90,7 +97,7 @@ function list_images_handler( $atts ) {
 		
 		$resp .= '<div style="display: ' . $display_style . '">';
 		
-		if ( true == $link_click){	
+		if ( true == $link_click ){	
 			if ('direct' == $link_to ) {
 				$resp .= '<a href="' . wp_get_attachment_url( $image_id ) . 
 							'" target="_new">' .
@@ -102,8 +109,7 @@ function list_images_handler( $atts ) {
 			}
 		} else { 
 			$resp .= wp_get_attachment_image( $image_id, $size );
-		}
-					
+		}				
 		$resp .= "</div>\n";
 	}	
 	
@@ -114,11 +120,16 @@ function list_images_handler( $atts ) {
 	// @todo - admin control panel
 	
 	// Controls
-	$resp .= '<div style="width: ' . $thumb_w . 'px; margin: 10px auto; ' .
-				'text-align: center">';
-	$resp .= '<a href="#" id="' . $slider_show_id . '_prev">prev</a> &nbsp;' .
-				'&nbsp; <a href="#" id="' . $slider_show_id . 
-				'_next">next</a>';
+	if ( true == $show_counter ) 
+		$image_counter = '<span id=\'' . $slider_show_id . '_count\'>1</span>' . 
+							'/' . count($images);	
+	
+		$resp .= '<div style="width: ' . $thumb_w . 'px; margin: 10px auto; ' .
+				'text-align: center; font-size: 0.75em">';
+	$resp .= '<a href="#" id="' . $slider_show_id . '_prev" ' . 
+				'title="Previous Image"><</a> &nbsp; ' . $image_counter . 
+				' &nbsp; <a href="#" id="' . $slider_show_id . 
+				'_next" title="Next Image">></a>';
 	$resp .= "</div>\n";
 
 	return $resp;
