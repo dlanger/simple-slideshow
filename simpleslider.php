@@ -12,7 +12,7 @@ License: BSD
 define("SIMPLESLIDER_VERSION", "1.0");
 
 add_shortcode( 'list_images', 'list_images_handler' );
-add_action( 'wp_enqueue_scripts', 'load_js' );
+add_action( 'init', 'load_js' );
 
 function load_js() {
 	// Don't want any of this if we're on an admin page
@@ -23,12 +23,12 @@ function load_js() {
 	// Load jQuery Cycle Lite locally, and jQuery from the Google CDN
 	wp_deregister_script( 'jquery' );
 	wp_register_script( 'jquery', 'https://ajax.googleapis.com/ajax/libs/' . 
-		'jquery/1.6.0/jquery.min.js', false, '1.6.0', false );
+		'jquery/1.6.0/jquery.min.js', false, null, false );
 	wp_register_script( 'mini_cycle', plugins_url( 
 		'jquery.cycle.lite.1.1.min.js', __FILE__ ), array( 'jquery' ), 
 		'1.1', false );
 	wp_register_script( 'simpleslider', plugins_url( 
-		'simpleslider.js', __FILE__ ), false, 1.0, false); 
+		'simpleslider.js', __FILE__ ), array( 'jquery', 'mini_cycle' ), 1.0, false); 
 	wp_enqueue_script( 'simpleslider' );		
 	wp_enqueue_script( 'jquery' );
 	wp_enqueue_script( 'mini_cycle' );
@@ -39,7 +39,8 @@ function list_images_handler( $atts ) {
 		'size' => 'medium',
 		'link_click' => 1,
 		'link_to' => 'attach',
-		'show_counter' => 1
+		'show_counter' => 0,
+		'transition_speed' => 100
 		), $atts ) );
 		
 	$images =& get_children( 'post_type=attachment&post_mime_type=' .
@@ -66,25 +67,20 @@ function list_images_handler( $atts ) {
 	}
 	
 	$slider_show_id = 'simpleslider_show_' . get_the_ID();
+	$slider_show_number = get_the_ID();
 	
-	// JS to set up the Cycle for this instance
-	$resp = '<script>' .
-				'$(document).ready(function(){$(\'#' . $slider_show_id . 
-				'\').cycle({timeout: 0, speed: 500, next: \'#' . 
-				$slider_show_id . '_next\', prev: \'#' . $slider_show_id .
-				'_prev\'}); ' .
-				'$(\'#' . $slider_show_id. ' > div > a > img\').' .
-				'removeAttr(\'title\'); ' .
-				'$(\'#' . $slider_show_id . ' > div\').' . 
-				'css(\'display\', \'block\');' .
-				'$(\'#' . $slider_show_id. ' > div > a, #' . $slider_show_id .
-				'_prev, #' . $slider_show_id. '_next\').' .
-				'css(\'outline\', \'none\');});';
+	$resp = '<script>'.
+				'if(typeof simpleslider_prefs == "undefined"){' .
+					'simpleslider_prefs = {};}' .
+				'lp = {};'.
+				'lp["slides"] = ' . count( $images ) . ';' . 
+				"lp[\"transition_speed\"] = ${transition_speed};" .
+				"simpleslider_prefs[{$slider_show_number}] = lp;";
 	$resp .= '</script>' . "\n";
 	
-	$resp .= '<div class="simpleslider_show" id="' . $slider_show_id . '" ' . 
-				'style="height: ' . $thumb_h . 'px; width: ' .
-				$thumb_w . 'px; margin: 10px auto;">' . "\n";
+	$resp .= "<div class=\"simpleslider_show\" id=\"{$slider_show_id}\" " . 
+				"style=\"height: {$thumb_h}px; width: {$thumb_w}px; " .
+				"margin: 10px auto;\">\n";
 	
 	$first = true;
 	foreach ( $images as $image_id => $image_data ) {
@@ -94,21 +90,24 @@ function list_images_handler( $atts ) {
 		// Cycle has done its setup and set the opacities.
 		$display_style = $first ? 'block' : 'none'; 
 		$first = false;
+		$image_tag = wp_get_attachment_image( $image_id, $size );
 		
-		$resp .= '<div style="display: ' . $display_style . '">';
-		
+		$resp .= "<div style=\"display: {$display_style}\">";
+						
 		if ( true == $link_click ){	
 			if ('direct' == $link_to ) {
 				$resp .= '<a href="' . wp_get_attachment_url( $image_id ) . 
-							'" target="_new">' .
-							wp_get_attachment_image( $image_id, $size ) . '</a>';
+							"\" class=\"simpleslider_image_link " . 
+							"simpleslider_link\" " . 
+							"target=\"_new\">{$image_tag}</a>";
 			} else {
 				$resp .= '<a href="' . get_attachment_link( $image_id ) . 
-							'" target="_new">' .
-							wp_get_attachment_image( $image_id, $size ) . '</a>';
+							"\" class=\"simpleslider_image_link " .
+							"simpleslider_link\" " . 
+							"target=\"_new\">{$image_tag}</a>";
 			}
 		} else { 
-			$resp .= wp_get_attachment_image( $image_id, $size );
+			$resp .= $image_tag;
 		}				
 		$resp .= "</div>\n";
 	}	
@@ -121,15 +120,16 @@ function list_images_handler( $atts ) {
 	
 	// Controls
 	if ( true == $show_counter ) 
-		$image_counter = '<span id=\'' . $slider_show_id . '_count\'>1</span>' . 
+		$image_counter = "<span id=\"{$slider_show_id}_count\">1</span>" . 
 							'/' . count($images);	
 	
-		$resp .= '<div style="width: ' . $thumb_w . 'px; margin: 10px auto; ' .
-				'text-align: center; font-size: 0.75em">';
-	$resp .= '<a href="#" id="' . $slider_show_id . '_prev" ' . 
-				'title="Previous Image"><</a> &nbsp; ' . $image_counter . 
-				' &nbsp; <a href="#" id="' . $slider_show_id . 
-				'_next" title="Next Image">></a>';
+	$resp .= "<div style=\"width: {$thumb_w}px; margin: 10px auto; " .
+				"text-align: center; font-size: 0.75em\">";
+	$resp .= "<a href=\"#\" id=\"{$slider_show_id}_prev\" " . 
+				"title=\"Previous Image\" class=\"simpleslider_link\"><</a> " .
+				"&nbsp; ${image_counter} " . 
+				"&nbsp; <a href=\"#\" id=\"{$slider_show_id}_next\" " .
+				"title=\"Next Image\" class=\"simpleslider_link\">></a>";
 	$resp .= "</div>\n";
 
 	return $resp;
