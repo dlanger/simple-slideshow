@@ -1,7 +1,8 @@
 //jQuery.noConflict();
 
+simpleslider_prefs = {};
+
 jQuery(document).ready(function($){
-	$(".simpleslider_link").css("outline", "none");
 	$(".simpleslider_image_link").each(function(){
 		$(this).children().removeAttr("title");
 	});

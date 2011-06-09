@@ -6,15 +6,57 @@ Description: A basic image slider. Attach images to a post, and then use a short
 Version: 1.0
 Author: Daniel Langer
 Author URI: http://www.daniellanger.com
-License: BSD
+License: FreeBSD
+
+Copyright (c) 2011 Daniel Langer <http://www.daniellanger.com>. 
+All rights reserved.
+
+Redistribution and use in source and binary forms, with or without
+modification, are permitted provided that the following conditions
+are met:
+
+1. Redistributions of source code must retain the above copyright
+   notice, this list of conditions and the following disclaimer.
+
+2. Redistributions in binary form must reproduce the above copyright
+   notice, this list of conditions and the following disclaimer in the
+   documentation and/or other materials provided with the distribution.
+
+THIS SOFTWARE IS PROVIDED BY THE AUTHORS AND CONTRIBUTORS ``AS IS'' AND
+ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
+ARE DISCLAIMED. IN NO EVENT SHALL THE AUTHORS OR CONTRIBUTORS BE LIABLE
+FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
+DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS
+OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION)
+HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT
+LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY
+OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
+SUCH DAMAGE.
+
 */
 
 define("SIMPLESLIDER_VERSION", "1.0");
 
-add_shortcode( 'list_images', 'list_images_handler' );
-add_action( 'init', 'load_js' );
+add_shortcode( 'list_images', 'ss_handle_shortcode' );
+add_action( 'init', 'ss_load_externals' );
+add_action( 'admin_menu', 'ss_load_admin' );
 
-function load_js() {
+function ss_load_admin() {
+	add_options_page( 'SimpleSlider Setting', 'SimpleSlider', 
+		'manage_options', 'dl_simpleslider', 'ss_admin_menu');
+}
+
+function ss_admin_menu() {
+	if ( ! current_user_can( 'manage_options' ) ) {
+		wp_die( __( 'You do not have sufficient privileges to access this ' .
+			'page. Please contact your administrator.' ) );
+	}
+	
+	echo "Hi!";
+}
+
+function ss_load_externals() {
 	// Don't want any of this if we're on an admin page
 	if ( is_admin() ) {
 		return;
@@ -26,15 +68,18 @@ function load_js() {
 		'jquery/1.6.0/jquery.min.js', false, null, false );
 	wp_register_script( 'mini_cycle', plugins_url( 
 		'jquery.cycle.lite.1.1.min.js', __FILE__ ), array( 'jquery' ), 
-		'1.1', false );
+		'1.1', true );
 	wp_register_script( 'simpleslider', plugins_url( 
-		'simpleslider.js', __FILE__ ), array( 'jquery', 'mini_cycle' ), 1.0, false); 
+		'simpleslider.js', __FILE__ ), array( 'jquery', 'mini_cycle' ), 1.0, false);
+	wp_register_style( 'simpleslider_css', plugins_url( 
+		'simpleslider.css', __FILE__ ), false, 1.0);
+	wp_enqueue_style( 'simpleslider_css' ); 
 	wp_enqueue_script( 'simpleslider' );		
 	wp_enqueue_script( 'jquery' );
 	wp_enqueue_script( 'mini_cycle' );
 }
 
-function list_images_handler( $atts ) {
+function ss_handle_shortcode( $atts ) {
 	extract( shortcode_atts( array( 
 		'size' => 'medium',
 		'link_click' => 1,
@@ -70,8 +115,6 @@ function list_images_handler( $atts ) {
 	$slider_show_number = get_the_ID();
 	
 	$resp = '<script>'.
-				'if(typeof simpleslider_prefs == "undefined"){' .
-					'simpleslider_prefs = {};}' .
 				'lp = {};'.
 				'lp["slides"] = ' . count( $images ) . ';' . 
 				"lp[\"transition_speed\"] = ${transition_speed};" .
@@ -79,8 +122,7 @@ function list_images_handler( $atts ) {
 	$resp .= '</script>' . "\n";
 	
 	$resp .= "<div class=\"simpleslider_show\" id=\"{$slider_show_id}\" " . 
-				"style=\"height: {$thumb_h}px; width: {$thumb_w}px; " .
-				"margin: 10px auto;\">\n";
+				"style=\"height: {$thumb_h}px; width: {$thumb_w}px;\">\n";
 	
 	$first = true;
 	foreach ( $images as $image_id => $image_data ) {
@@ -118,13 +160,17 @@ function list_images_handler( $atts ) {
 
 	// @todo - admin control panel
 	
+	//@TODO - JS for the counter
+	
 	// Controls
 	if ( true == $show_counter ) 
 		$image_counter = "<span id=\"{$slider_show_id}_count\">1</span>" . 
-							'/' . count($images);	
+							'/' . count($images);
+	else
+		$image_counter = '';	
 	
-	$resp .= "<div style=\"width: {$thumb_w}px; margin: 10px auto; " .
-				"text-align: center; font-size: 0.75em\">";
+	$resp .= "<div style=\"width: {$thumb_w}px; \" " .
+				"class=\"simpleslider_controls\">";
 	$resp .= "<a href=\"#\" id=\"{$slider_show_id}_prev\" " . 
 				"title=\"Previous Image\" class=\"simpleslider_link\"><</a> " .
 				"&nbsp; ${image_counter} " . 

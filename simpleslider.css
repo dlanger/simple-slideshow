@@ -1,0 +1,15 @@
+@CHARSET "UTF-8";
+
+.simpleslider_link {
+	outline: none;
+}
+
+.simpleslider_controls {
+	margin: 10px auto;
+	text-align: center; 
+	font-size: 0.75em; 	
+}
+
+.simpleslider_show {
+	margin: 10px auto;	
+}
