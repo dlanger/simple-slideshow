@@ -36,27 +36,17 @@ SUCH DAMAGE.
 
 */
 
-define("SIMPLESLIDER_VERSION", "1.0");
+define("SIMPLESLIDESHOW_VERSION", "1.0");
 
-add_shortcode( 'list_images', 'ss_handle_shortcode' );
-add_action( 'init', 'ss_load_externals' );
-add_action( 'admin_menu', 'ss_load_admin' );
+add_shortcode( 'simpleslideshow', 'sss_handle_shortcode' );
+add_action( 'init', 'sss_load_externals' );
 
-function ss_load_admin() {
-	add_options_page( 'SimpleSlider Setting', 'SimpleSlider', 
-		'manage_options', 'dl_simpleslider', 'ss_admin_menu');
+if( is_admin() ){
+	require_once 'simpleslider-admin.php';
 }
 
-function ss_admin_menu() {
-	if ( ! current_user_can( 'manage_options' ) ) {
-		wp_die( __( 'You do not have sufficient privileges to access this ' .
-			'page. Please contact your administrator.' ) );
-	}
-	
-	echo "Hi!";
-}
 
-function ss_load_externals() {
+function sss_load_externals() {
 	// Don't want any of this if we're on an admin page
 	if ( is_admin() ) {
 		return;
@@ -79,7 +69,8 @@ function ss_load_externals() {
 	wp_enqueue_script( 'mini_cycle' );
 }
 
-function ss_handle_shortcode( $atts ) {
+
+function sss_handle_shortcode( $atts ) {
 	extract( shortcode_atts( array( 
 		'size' => 'medium',
 		'link_click' => 1,
