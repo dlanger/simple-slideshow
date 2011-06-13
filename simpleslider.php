@@ -1,8 +1,8 @@
 <?php 
 /*
-Plugin Name: Simple Slider
-Plugin URI:	http://daniellanger.com/simpleslider
-Description: A basic image slider. Attach images to a post, and then use a shortcode to display them. Their thumbnails (at a configurable size) will be shown in a jQuery Cycle slideshow, and each will be a link to the full-sized version.
+Plugin Name: Simple Slideshow
+Plugin URI:	http://daniellanger.com/simpleslideshow
+Description: @TODO
 Version: 1.0
 Author: Daniel Langer
 Author URI: http://www.daniellanger.com
@@ -38,6 +38,8 @@ SUCH DAMAGE.
 
 define("SIMPLESLIDESHOW_VERSION", "1.0");
 
+register_activation_hook( __FILE__, 'sss_activation' );
+register_deactivation_hook( __FILE__, 'sss_uninstall' );
 add_shortcode( 'simpleslideshow', 'sss_handle_shortcode' );
 add_action( 'init', 'sss_load_externals' );
 
@@ -45,6 +47,16 @@ if( is_admin() ){
 	require_once 'simpleslider-admin.php';
 }
 
+function sss_activation() {
+	// When activating don't clobber any existing settings, but load 
+	// defaults if none are present
+	if( ! get_option( 'sss_settings') ) 
+		update_option( 'sss_settings', sss_settings_defaults( NULL, true ) );	
+}
+
+function sss_uninstall() {
+	delete_option( 'sss_settings' );
+}
 
 function sss_load_externals() {
 	// Don't want any of this if we're on an admin page
@@ -71,6 +83,7 @@ function sss_load_externals() {
 
 
 function sss_handle_shortcode( $atts ) {
+	//@todo Load these defaults from the options array
 	extract( shortcode_atts( array( 
 		'size' => 'medium',
 		'link_click' => 1,
@@ -148,8 +161,6 @@ function sss_handle_shortcode( $atts ) {
 	$resp .= "</div>\n";
 	
 	// @TODO - style these controls a bit
-
-	// @todo - admin control panel
 	
 	//@TODO - JS for the counter
 	

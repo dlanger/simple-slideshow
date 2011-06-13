@@ -1,5 +1,5 @@
 //jQuery.noConflict();
-
+// @TODO turn this back on
 simpleslider_prefs = {};
 
 jQuery(document).ready(function($){

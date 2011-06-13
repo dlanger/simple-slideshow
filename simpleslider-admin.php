@@ -2,9 +2,7 @@
 
 add_action( 'admin_init', 'sss_settings_init' );
 add_action( 'admin_menu', 'sss_load_menu' );
-
-//@TODO Why doesn't this work?
-add_filter( 'plugin_action_links', 'sss_add_action_link', 10, 6 );
+add_filter( 'plugin_action_links', 'sss_add_action_link', 10, 2 );
 
 function sss_settings_init() {
 	register_setting( 'sss_settings', 'sss_settings', 'sss_settings_validate');
@@ -32,12 +30,15 @@ function sss_settings_text() {
 			'changed on a per-show basis by using attributes.';
 }
 
-function sss_settings_defaults( $field ){
+function sss_settings_defaults( $field, $return_all = false ){
 	$defs = array('size' => 'medium',
 					'speed' => 100,
 					'click' => 0,
 					'target' => 'direct');
-	return $defs[ $field ];
+	if( $return_all )
+		return $defs;
+	else
+		return $defs[ $field ];
 }
 
 function sss_settings_size() {
@@ -45,7 +46,7 @@ function sss_settings_size() {
 	$sizes = get_intermediate_image_sizes();
 	$curr = sss_settings_defaults('size');
 	
-	if( isset( $opts[ 'size' ] ) )
+	if( $opts and isset( $opts[ 'size' ] ) )
 		$curr = $opts[ 'size' ];
 	 	
 	echo '<select id="sss_size" name="sss_settings[size]">';
@@ -56,13 +57,15 @@ function sss_settings_size() {
 		echo 'value="', $size, '">', ucfirst($size) ,'</option>';
 	}
 	echo '</select>';
+	
+	echo plugin_basename( str_replace( '-admin', '', __FILE__ ) );
 }
 
 function sss_settings_speed() {
 	$opts = get_option( 'sss_settings' );
 	$curr = sss_settings_defaults('speed');
 		
-	if( isset( $opts[ 'speed' ] ) )
+	if( $opts and isset( $opts[ 'speed' ] ) )
 		$curr = $opts[ 'speed' ];
 		
 	echo '<input type="number" min="1" max="1000" step="10" value="', 
@@ -74,7 +77,7 @@ function sss_settings_click() {
 	$opts = get_option( 'sss_settings' );
 	$curr = sss_settings_defaults('click');
 		
-	if( isset( $opts[ 'click' ] ) )
+	if( $opts and isset( $opts[ 'click' ] ) )
 		$curr = $opts[ 'click' ];
 	
 	echo '<select id="sss_click" name="sss_settings[click]"><option ';
@@ -90,7 +93,7 @@ function sss_settings_target() {
 	$opts = get_option( 'sss_settings' );
 	$curr = sss_settings_defaults('target');
 		
-	if( isset( $opts[ 'target' ] ) )
+	if( $opts and isset( $opts[ 'target' ] ) )
 		$curr = $opts[ 'target' ];
 		
 	echo '<select id="sss_target" name="sss_settings[target]"><option ';
@@ -142,15 +145,13 @@ function sss_settings_validate( $inp ) {
 	return $safe_inp;
 }
 
-//@TODO Why doesn't this work?
-
-// Adding 'Settings' link to plugin listing, 
-// from http://www.wpmods.com/adding-plugin-action-links
+// From http://www.wpmods.com/adding-plugin-action-links
 function sss_add_action_link( $links, $file ){
 	static $this_plugin;
 	
 	if( ! $this_plugin ) {
-		$this_plugin = plugin_basename(__FILE__);
+		// Adjust to reflect filename of main plugin file
+		$this_plugin = plugin_basename( str_replace( '-admin', '', __FILE__ ) );
 	}
 	
 	if( $file == $this_plugin ) {
@@ -161,7 +162,6 @@ function sss_add_action_link( $links, $file ){
 	return $links;
 }
 
-
 function sss_admin_menu() {
 	if ( ! current_user_can( 'manage_options' ) ) {
 		wp_die( __( 'You do not have sufficient privileges to access this ' .
@@ -171,6 +171,7 @@ function sss_admin_menu() {
 ?>
 
 <div class="wrap">
+<div id="icon-options-general" class="icon32"></div>
 <h2>Simple Slideshow</h2>
 
 <p>Thanks for downloading Simple Slideshow. If you like it, please feel free 
