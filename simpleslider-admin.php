@@ -33,15 +33,6 @@ function sss_settings_text() {
 			'changed on a per-show basis by using attributes.';
 }
 
-function sss_settings_validate( $inp ) {
-	$fields = array_keys( sss_settings_defaults(NULL, true) );
-	$safe_inp = array();
-	foreach( $fields as $field)
-		$safe_inp[ $field ] = call_user_func( 'sss_settings_' . $field . 
-			'_val', $inp[ $field ]);	
-	return $safe_inp;
-}
-
 function sss_settings_size() {
 	$opts = get_option( 'sss_settings' );
 	$sizes = get_intermediate_image_sizes();

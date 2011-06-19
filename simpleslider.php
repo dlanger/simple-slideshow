@@ -96,8 +96,11 @@ function sss_handle_shortcode( $attrs ) {
 						'show_counter' => $defaults[ 'counter' ],
 						'transition_speed' => $defaults[ 'speed' ] );
 	
-	extract( shortcode_atts( $default_attrs, $attrs ) );
-		
+	extract( sss_settings_validate(shortcode_atts( $default_attrs, 
+				$attrs ) ) );
+
+	
+	
 	$images =& get_children( 'post_type=attachment&post_mime_type=' .
 								'image&post_parent=' . get_the_ID() ); 	
 	
@@ -106,10 +109,6 @@ function sss_handle_shortcode( $attrs ) {
 	if( empty($images) ) {
 		return '';
 	}
-
-	// Validate all the shortcode attributes
-	foreach( array_keys( $default_attrs ) as $arg)
-		$$arg = call_user_func( 'sss_settings_' . $arg . '_val', $$arg);
 		
 	// Figure out the maximum size of the images being displayed so we can 
 	// set the smallest possible fixed-size container to cycle in.
@@ -146,7 +145,7 @@ function sss_handle_shortcode( $attrs ) {
 		$resp .= "<div style=\"display: {$display_style}\">";
 						
 		if ( 1 == $link_click ){	
-			if ('direct' == $link_target ) {
+			if ( 'direct' == $link_target ) {
 				$resp .= '<a href="' . wp_get_attachment_url( $image_id ) . 
 							"\" class=\"simpleslider_image_link " . 
 							"simpleslider_link\" " . 
