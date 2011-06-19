@@ -33,7 +33,6 @@ function sss_uninstall() {
 }
 
 function sss_load_externals() {
-	// Don't want any of this if we're on an admin page
 	if ( is_admin() ) {
 		return;
 	}

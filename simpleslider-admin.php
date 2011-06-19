@@ -17,7 +17,7 @@ function sss_settings_init() {
 	add_settings_field( 'sss_link_click', 'Click image to open full-size ' . 
 		'version in a new window', 'sss_settings_link_click', 
 		'wp_simpleslideshow', 'sss_settings_main');
-	add_settings_field( 'sss_link_target', 'Link target ', 
+	add_settings_field( 'sss_link_target', 'Link target', 
 		'sss_settings_link_target', 'wp_simpleslideshow', 
 		'sss_settings_main');
 	//TODO Add menu option for JS image counter
@@ -27,13 +27,14 @@ function sss_load_menu() {
 	global $sss_menu_hook_name;
 	$sss_menu_hook_name = add_options_page( 'Simple Slideshow Settings', 'Simple Slideshow', 
 		'manage_options', 'wp_simpleslideshow', 'sss_admin_menu');
-	
 }
 
 function sss_settings_text() {
-	global $hookname;
+	
 	echo 'Options set here become the <em>default</em>, but can still be ', 
-			'changed on a per-show basis by using attributes.';
+			'changed on a per-show basis by using attributes. For more ', 
+			'information about the meaning of each option, please click ',
+			'the \'Help\' link above.';
 }
 
 //@TODO - Make this text better
@@ -41,7 +42,7 @@ function sss_contextual_help_handler( $help, $screen_id, $screen) {
 	global $sss_menu_hook_name;
 	
 	if( $screen_id == $sss_menu_hook_name ) {
-		$help = 'Please consult the tooltip on each menu option for an explanation of their meaning.';
+		require_once 'simpleslider-admin-help.php';
 	}
 	
 	return $help;
