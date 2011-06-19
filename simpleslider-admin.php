@@ -5,9 +5,11 @@ add_action( 'admin_menu', 'sss_load_menu' );
 add_filter( 'plugin_action_links', 'sss_add_action_link', 10, 2 );
 add_filter( 'contextual_help', 'sss_contextual_help_handler', 10, 3);
 
+require_once 'simpleslider-admin-help.php';
+
 function sss_settings_init() {
 	register_setting( 'sss_settings', 'sss_settings', 'sss_settings_validate');
-	add_settings_section( 'sss_settings_main', 'Default Settings', 
+	add_settings_section( 'sss_settings_main', '', 
 		'sss_settings_text', 'wp_simpleslideshow' );
 	add_settings_field( 'sss_size', 'Image size', 'sss_settings_size', 
 		'wp_simpleslideshow', 'sss_settings_main');
@@ -41,9 +43,8 @@ function sss_settings_text() {
 function sss_contextual_help_handler( $help, $screen_id, $screen) {
 	global $sss_menu_hook_name;
 	
-	if( $screen_id == $sss_menu_hook_name ) {
-		require_once 'simpleslider-admin-help.php';
-	}
+	if( $screen_id == $sss_menu_hook_name ) 
+		$help = $sss_contextual_help;
 	
 	return $help;
 }
@@ -133,7 +134,7 @@ function sss_admin_menu() {
 		wp_die( __( 'You do not have sufficient privileges to access this ' .
 			'page. Please contact your administrator.' ) );
 	}
-	
+	//@TODO Add some jQuery themed CSS into the admin-specific CSS page to that the tabs look right 
 ?>
 
 <div class="wrap">
@@ -147,18 +148,34 @@ learn about it.</p>
 <p><b>Developers:</b> Got an idea on how to make Simple Slideshow better? Fork 
 it from <a href="#">GitHub</a> and send in a pull request!</p> 
 
-<div>
-<form method="post" action="options.php">
+<script>
+	jQuery(function() { jQuery("#tabs").tabs(); });
+</script>
 
-<?php 
-	settings_fields( 'sss_settings' );
-	do_settings_sections( 'wp_simpleslideshow' );
-?>
+<div id="tabs">
+	<ul>
+		<li><a href="#tabs-1">Settings</a></li>
+		<li><a href="#tabs-2">Instructions</a></li>
+	</ul>
 
-<p class="submit">
-<input type="submit" class="button-primary" value="Save Changes">
-</p>
-</form>
+	<div id="tabs-1">
+		<p>
+			<form method="post" action="options.php">			
+				<?php 
+					settings_fields( 'sss_settings' );
+					do_settings_sections( 'wp_simpleslideshow' );
+				?>
+				<p class="submit">
+					<input type="submit" class="button-primary" value="Save Changes">
+				</p>
+			</form>
+		</p>
+	</div>
+	
+	<div id="tabs-2"> 
+		<p><?php echo $sss_tab_help; ?></p>
+	</div>
+
 </div>
 
 <?php 	

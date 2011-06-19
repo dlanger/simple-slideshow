@@ -34,6 +34,8 @@ function sss_uninstall() {
 
 function sss_load_externals() {
 	if ( is_admin() ) {
+		wp_enqueue_script( 'jquery-ui-core' );
+		wp_enqueue_script( 'jquery-ui-tabs' );
 		return;
 	}
 	
