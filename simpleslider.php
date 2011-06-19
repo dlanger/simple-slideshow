@@ -37,6 +37,7 @@ SUCH DAMAGE.
 */
 
 define("SIMPLESLIDESHOW_VERSION", "1.0");
+require_once 'simpleslider-validate.php';
 
 register_activation_hook( __FILE__, 'sss_activation' );
 register_deactivation_hook( __FILE__, 'sss_uninstall' );
@@ -82,15 +83,20 @@ function sss_load_externals() {
 }
 
 
-function sss_handle_shortcode( $atts ) {
-	//@todo Load these defaults from the options array
-	extract( shortcode_atts( array( 
-		'size' => 'medium',
-		'link_click' => 1,
-		'link_to' => 'attach',
-		'show_counter' => 0,
-		'transition_speed' => 100
-		), $atts ) );
+function sss_handle_shortcode( $attrs ) {
+	$defaults = get_option( 'sss_settings' );
+	if( ! $defaults ) {
+		require_once 'simpleslider-admin.php';
+		$defaults = sss_settings_defaults(NULL, true);
+	}
+
+	$default_attrs =  array( 'size' => $defaults[ 'size' ],
+						'link_click' => $defaults[ 'click' ],
+						'link_target' => $defaults[ 'target' ],
+						'show_counter' => $defaults[ 'counter' ],
+						'transition_speed' => $defaults[ 'speed' ] );
+	
+	extract( shortcode_atts( $default_attrs, $attrs ) );
 		
 	$images =& get_children( 'post_type=attachment&post_mime_type=' .
 								'image&post_parent=' . get_the_ID() ); 	
@@ -101,13 +107,12 @@ function sss_handle_shortcode( $atts ) {
 		return '';
 	}
 
-	// If the size specified in the argument to the shortcode isn't one 
-	// WordPress recognizes, default to the 'medium' size.	
-	if ( ! in_array($size, get_intermediate_image_sizes(), true))
-		$size = 'medium';	
-	
+	// Validate all the shortcode attributes
+	foreach( array_keys( $default_attrs ) as $arg)
+		$$arg = call_user_func( 'sss_settings_' . $arg . '_val', $$arg);
+		
 	// Figure out the maximum size of the images being displayed so we can 
-	// set the smallest possible fixed-size container to Cycle in.
+	// set the smallest possible fixed-size container to cycle in.
 	$thumb_w = $thumb_h = 0;
 	foreach ( $images as $image_id => $image_data ) {
 		$info = wp_get_attachment_metadata( $image_id );
@@ -133,15 +138,15 @@ function sss_handle_shortcode( $atts ) {
 		// To prevent flash of unstyled content, we set all slideshow
 		// elements aside from the first one to be hidden. JS
 		// in document.onready then sets them back to block once
-		// Cycle has done its setup and set the opacities.
+		// cycle has done its setup and set the opacities.
 		$display_style = $first ? 'block' : 'none'; 
 		$first = false;
 		$image_tag = wp_get_attachment_image( $image_id, $size );
 		
 		$resp .= "<div style=\"display: {$display_style}\">";
 						
-		if ( true == $link_click ){	
-			if ('direct' == $link_to ) {
+		if ( 1 == $link_click ){	
+			if ('direct' == $link_target ) {
 				$resp .= '<a href="' . wp_get_attachment_url( $image_id ) . 
 							"\" class=\"simpleslider_image_link " . 
 							"simpleslider_link\" " . 

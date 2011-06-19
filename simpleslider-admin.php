@@ -10,13 +10,16 @@ function sss_settings_init() {
 		'sss_settings_text', 'wp_simpleslideshow' );
 	add_settings_field( 'sss_size', 'Image size', 'sss_settings_size', 
 		'wp_simpleslideshow', 'sss_settings_main');
-	add_settings_field( 'sss_speed', 'Transition speed', 
-		'sss_settings_speed', 'wp_simpleslideshow', 'sss_settings_main');
-	add_settings_field( 'sss_link', 'Click image to open full-size version ' . 
-		'in a new window', 'sss_settings_click', 'wp_simpleslideshow', 
+	add_settings_field( 'sss_transition_speed', 'Transition speed', 
+		'sss_settings_transition_speed', 'wp_simpleslideshow', 
 		'sss_settings_main');
-	add_settings_field( 'sss_target', 'Link target ', 'sss_settings_target', 
+	add_settings_field( 'sss_link_click', 'Click image to open full-size ' . 
+		'version in a new window', 'sss_settings_link_click', 
 		'wp_simpleslideshow', 'sss_settings_main');
+	add_settings_field( 'sss_link_target', 'Link target ', 
+		'sss_settings_link_target', 'wp_simpleslideshow', 
+		'sss_settings_main');
+	//TODO Add menu option for JS image counter
 }
 
 function sss_load_menu() {
@@ -30,15 +33,13 @@ function sss_settings_text() {
 			'changed on a per-show basis by using attributes.';
 }
 
-function sss_settings_defaults( $field, $return_all = false ){
-	$defs = array('size' => 'medium',
-					'speed' => 100,
-					'click' => 0,
-					'target' => 'direct');
-	if( $return_all )
-		return $defs;
-	else
-		return $defs[ $field ];
+function sss_settings_validate( $inp ) {
+	$fields = array_keys( sss_settings_defaults(NULL, true) );
+	$safe_inp = array();
+	foreach( $fields as $field)
+		$safe_inp[ $field ] = call_user_func( 'sss_settings_' . $field . 
+			'_val', $inp[ $field ]);	
+	return $safe_inp;
 }
 
 function sss_settings_size() {
@@ -56,31 +57,30 @@ function sss_settings_size() {
 			echo 'selected ';			
 		echo 'value="', $size, '">', ucfirst($size) ,'</option>';
 	}
-	echo '</select>';
-	
-	echo plugin_basename( str_replace( '-admin', '', __FILE__ ) );
+	echo '</select>';	
 }
 
-function sss_settings_speed() {
+function sss_settings_transition_speed() {
 	$opts = get_option( 'sss_settings' );
-	$curr = sss_settings_defaults('speed');
+	$curr = sss_settings_defaults('transition_speed');
 		
-	if( $opts and isset( $opts[ 'speed' ] ) )
-		$curr = $opts[ 'speed' ];
+	if( $opts and isset( $opts[ 'transition_speed' ] ) )
+		$curr = $opts[ 'transition_speed' ];
 		
 	echo '<input type="number" min="1" max="1000" step="10" value="', 
-			$curr, '" id="sss_speed" ',
-			'name="sss_settings[speed]">';
+			$curr, '" id="sss_transition_speed" ',
+			'name="sss_settings[transition_speed]">';
 }
 
-function sss_settings_click() {
+function sss_settings_link_click() {
 	$opts = get_option( 'sss_settings' );
-	$curr = sss_settings_defaults('click');
+	$curr = sss_settings_defaults('link_click');
 		
-	if( $opts and isset( $opts[ 'click' ] ) )
-		$curr = $opts[ 'click' ];
+	if( $opts and isset( $opts[ 'link_click' ] ) )
+		$curr = $opts[ 'link_click' ];
 	
-	echo '<select id="sss_click" name="sss_settings[click]"><option ';
+	echo '<select id="sss_link_click" name="sss_settings[link_click]">',
+			'<option ';
 	if( ! $curr )
 		echo 'selected ';
 	echo 'value="0">No</option><option ';
@@ -89,60 +89,20 @@ function sss_settings_click() {
 	echo 'value="1">Yes</option></select>';	
 }
 
-function sss_settings_target() {
+function sss_settings_link_target() {
 	$opts = get_option( 'sss_settings' );
-	$curr = sss_settings_defaults('target');
+	$curr = sss_settings_defaults('link_target');
 		
-	if( $opts and isset( $opts[ 'target' ] ) )
-		$curr = $opts[ 'target' ];
+	if( $opts and isset( $opts[ 'link_target' ] ) )
+		$curr = $opts[ 'link_target' ];
 		
-	echo '<select id="sss_target" name="sss_settings[target]"><option ';
+	echo '<select id="sss_target" name="sss_settings[link_target]"><option ';
 	if( 'attach' == $curr )
 		echo 'selected ';
 	echo 'value="attach">Attachment page</option><option ';
 	if( 'direct' == $curr )
 		echo 'selected ';
 	echo 'value="direct">Image file</option></select>';	
-}
-
-function sss_settings_size_val( $inp ){
-	if( in_array( $inp, get_intermediate_image_sizes() ) )
-		return $inp;
-	else 
-		return sss_settings_defaults('size'); 
-}
-
-function sss_settings_speed_val( $inp ){
-	$safe_inp = ( int ) $inp;
-	if( $safe_inp < 1 or $safe_inp > 1000)
-		return sss_settings_defaults('speed');
-	else 
-		return $safe_inp;
-}
-
-function sss_settings_click_val( $inp ){
-	$safe_inp = ( int ) $inp;
-	if( $safe_inp > 1 or $safe_inp < 0)
-		return sss_settings_defaults('click');
-	else
-		return $safe_inp;
-}
-
-function sss_settings_target_val( $inp ){
-	if( $inp == 'direct' or $inp == 'attach')
-		return $inp;
-	else 
-		return sss_settings_defaults('target');
-		
-}
-
-function sss_settings_validate( $inp ) {
-	$fields = array( 'size', 'speed', 'click', 'target');
-	$safe_inp = array();
-	foreach( $fields as $field)
-		$safe_inp[ $field ] = call_user_func( 'sss_settings_' . $field . 
-			'_val', $inp[ $field ]);	
-	return $safe_inp;
 }
 
 // From http://www.wpmods.com/adding-plugin-action-links
