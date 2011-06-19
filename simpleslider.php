@@ -1,4 +1,5 @@
 <?php 
+
 /*
 Plugin Name: Simple Slideshow
 Plugin URI:	http://daniellanger.com/simpleslideshow
@@ -7,36 +8,8 @@ Version: 1.0
 Author: Daniel Langer
 Author URI: http://www.daniellanger.com
 License: FreeBSD
-
-Copyright (c) 2011 Daniel Langer <http://www.daniellanger.com>. 
-All rights reserved.
-
-Redistribution and use in source and binary forms, with or without
-modification, are permitted provided that the following conditions
-are met:
-
-1. Redistributions of source code must retain the above copyright
-   notice, this list of conditions and the following disclaimer.
-
-2. Redistributions in binary form must reproduce the above copyright
-   notice, this list of conditions and the following disclaimer in the
-   documentation and/or other materials provided with the distribution.
-
-THIS SOFTWARE IS PROVIDED BY THE AUTHORS AND CONTRIBUTORS ``AS IS'' AND
-ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
-IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
-ARE DISCLAIMED. IN NO EVENT SHALL THE AUTHORS OR CONTRIBUTORS BE LIABLE
-FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
-DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS
-OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION)
-HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT
-LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY
-OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
-SUCH DAMAGE.
-
 */
 
-define("SIMPLESLIDESHOW_VERSION", "1.0");
 require_once 'simpleslider-validate.php';
 
 register_activation_hook( __FILE__, 'sss_activation' );
@@ -85,10 +58,8 @@ function sss_load_externals() {
 
 function sss_handle_shortcode( $attrs ) {
 	$defaults = get_option( 'sss_settings' );
-	if( ! $defaults ) {
-		require_once 'simpleslider-admin.php';
+	if( ! $defaults ) 
 		$defaults = sss_settings_defaults(NULL, true);
-	}
 
 	$default_attrs =  array( 'size' => $defaults[ 'size' ],
 						'link_click' => $defaults[ 'click' ],
@@ -96,19 +67,16 @@ function sss_handle_shortcode( $attrs ) {
 						'show_counter' => $defaults[ 'counter' ],
 						'transition_speed' => $defaults[ 'speed' ] );
 	
-	extract( sss_settings_validate(shortcode_atts( $default_attrs, 
+	extract( sss_settings_validate( shortcode_atts( $default_attrs, 
 				$attrs ) ) );
-
-	
 	
 	$images =& get_children( 'post_type=attachment&post_mime_type=' .
 								'image&post_parent=' . get_the_ID() ); 	
 	
 	// Don't load anything or start processing if there are no 
 	// images to display.
-	if( empty($images) ) {
+	if( empty($images) ) 
 		return '';
-	}
 		
 	// Figure out the maximum size of the images being displayed so we can 
 	// set the smallest possible fixed-size container to cycle in.

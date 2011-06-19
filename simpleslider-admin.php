@@ -3,6 +3,7 @@
 add_action( 'admin_init', 'sss_settings_init' );
 add_action( 'admin_menu', 'sss_load_menu' );
 add_filter( 'plugin_action_links', 'sss_add_action_link', 10, 2 );
+add_filter( 'contextual_help', 'sss_contextual_help_handler', 10, 3);
 
 function sss_settings_init() {
 	register_setting( 'sss_settings', 'sss_settings', 'sss_settings_validate');
@@ -23,14 +24,27 @@ function sss_settings_init() {
 }
 
 function sss_load_menu() {
-	add_options_page( 'Simple Slideshow Settings', 'Simple Slideshow', 
+	global $sss_menu_hook_name;
+	$sss_menu_hook_name = add_options_page( 'Simple Slideshow Settings', 'Simple Slideshow', 
 		'manage_options', 'wp_simpleslideshow', 'sss_admin_menu');
 	
 }
 
 function sss_settings_text() {
+	global $hookname;
 	echo 'Options set here become the <em>default</em>, but can still be ', 
 			'changed on a per-show basis by using attributes.';
+}
+
+//@TODO - Make this text better
+function sss_contextual_help_handler( $help, $screen_id, $screen) {
+	global $sss_menu_hook_name;
+	
+	if( $screen_id == $sss_menu_hook_name ) {
+		$help = 'Please consult the tooltip on each menu option for an explanation of their meaning.';
+	}
+	
+	return $help;
 }
 
 function sss_settings_size() {
