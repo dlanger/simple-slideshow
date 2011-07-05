@@ -36,6 +36,9 @@ function sss_load_externals() {
 	if ( is_admin() ) {
 		wp_enqueue_script( 'jquery-ui-core' );
 		wp_enqueue_script( 'jquery-ui-tabs' );
+		wp_register_style( 'simpleslider_admin', plugins_url(
+			'simpleslider-admin.css', __FILE__ ), false, 1.0);
+		wp_enqueue_style( 'simpleslider_admin');
 		return;
 	}
 	

@@ -32,7 +32,6 @@ function sss_load_menu() {
 }
 
 function sss_settings_text() {
-	
 	echo 'Options set here become the <em>default</em>, but can still be ', 
 			'changed on a per-show basis by using attributes. For more ', 
 			'information about the meaning of each option, please click ',
