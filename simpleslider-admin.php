@@ -22,7 +22,7 @@ function sss_settings_init() {
 	add_settings_field( 'sss_link_target', 'Link target', 
 		'sss_settings_link_target', 'wp_simpleslideshow', 
 		'sss_settings_main');
-	//TODO Add menu option for JS image counter
+	//@TODO Add menu option for JS image counter
 }
 
 function sss_load_menu() {
@@ -32,13 +32,13 @@ function sss_load_menu() {
 }
 
 function sss_settings_text() {
-	echo 'Options set here become the <em>default</em>, but can still be ', 
-			'changed on a per-show basis by using attributes. For more ', 
-			'information about the meaning of each option, please click ',
-			'the \'Help\' link above.';
+	// Moved into the form itself in order to keep consistent look/avoid WP's
+	// styling of settings section introductory texts - but still need a 
+	// function here to keep the signature expected.
+	return;
 }
 
-//@TODO - Make this text better
+//@TODO - make this work (the external link to help file)
 function sss_contextual_help_handler( $help, $screen_id, $screen) {
 	global $sss_menu_hook_name;
 	
@@ -73,7 +73,7 @@ function sss_settings_transition_speed() {
 	if( $opts and isset( $opts[ 'transition_speed' ] ) )
 		$curr = $opts[ 'transition_speed' ];
 		
-	echo '<input type="number" min="1" max="1000" step="10" value="', 
+	echo '<input type="number" min="10" max="1000" step="10" value="', 
 			$curr, '" id="sss_transition_speed" ',
 			'name="sss_settings[transition_speed]">';
 }
@@ -133,7 +133,6 @@ function sss_admin_menu() {
 		wp_die( __( 'You do not have sufficient privileges to access this ' .
 			'page. Please contact your administrator.' ) );
 	}
-	//@TODO Add some jQuery themed CSS into the admin-specific CSS page to that the tabs look right 
 ?>
 
 <div class="wrap">
@@ -160,10 +159,15 @@ it from <a href="#">GitHub</a> and send in a pull request!</p>
 	<div id="tabs-1">
 		<p>
 			<form method="post" action="options.php">			
+				<p>Options set here become the <em>default</em>, but can still 
+				be changed on a per-show basis by using attributes. For more 
+				information about the meaning of each option, please click 
+				the 'Help' link above.</p>
 				<?php 
 					settings_fields( 'sss_settings' );
 					do_settings_sections( 'wp_simpleslideshow' );
 				?>
+				
 				<p class="submit">
 					<input type="submit" class="button-primary" value="Save Changes">
 				</p>
