@@ -38,9 +38,9 @@ function sss_settings_text() {
 	return;
 }
 
-//@TODO - make this work (the external link to help file)
-function sss_contextual_help_handler( $help, $screen_id, $screen) {
-	global $sss_menu_hook_name;
+// From http://codex.wordpress.org/Adding_Contextual_Help_to_Administration_Menus
+function sss_contextual_help_handler( $contextual_help, $screen_id, $screen) {
+	global $sss_menu_hook_name, $sss_contextual_help;
 	
 	if( $screen_id == $sss_menu_hook_name ) 
 		$help = $sss_contextual_help;

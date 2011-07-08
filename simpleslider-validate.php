@@ -30,7 +30,7 @@ function sss_settings_size_val( $inp ){
 
 function sss_settings_transition_speed_val( $inp ){
 	$safe_inp = ( int ) $inp;
-	if( $safe_inp < 1 or $safe_inp > 1000)
+	if( $safe_inp < 10 or $safe_inp > 1000)
 		return sss_settings_defaults('transition_speed');
 	else 
 		return $safe_inp;

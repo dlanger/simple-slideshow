@@ -7,7 +7,7 @@ $sss_contextual_help = <<<HELP
 to the 'Media' control panel, under 'Settings'.</p>
 
 <p><b>Transition Speed</b>: The amount of time, in miliseconds, it will take to fade between individual photos in the slideshow. For a 
-quick fade, try entering 150. For a slow fade, try entering 500. Values between 1 and 1000 are valid. </p> 
+quick fade, try entering 150. For a slow fade, try entering 500. Values between 10 and 1000 are valid. </p> 
 
 <p><b>Click Image</b>: If this is enabled, clicking the current sldieshow image will open a new browser window showing the 
 full-size version of the image. If this is disabled, clicking the current slideshow image will have no effect.</p>
