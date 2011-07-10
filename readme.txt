@@ -19,7 +19,7 @@ I couldn't find one, so I wrote my own.
 Simple Slideshow is exactly what it says on the box. It's a plugin that's simple to deal with, and when used, produces a simple-looking
 slideshow that integrates well into any theme, and won't clash with other plugins. 
 
-If you have any problems with it, check out the [issue tracker](@TODO) and I'll try and help you figure it out. Most are
+If you have any problems with it, check out the [issue tracker](https://github.com/dlanger/simple-slideshow/issues) and I'll try and help you figure it out. Most are
 caused by other incorrectly-coded themes or plugins, and can be easily solved. 
 
 == Installation ==
@@ -32,7 +32,7 @@ caused by other incorrectly-coded themes or plugins, and can be easily solved.
 
 First, you need to upload the images that you'd like in your slideshow. Use the built-in *media uploader* to do this; 
 while editing the post, click the small picture icon above the post you're editing to open it. From this screen you can add, edit, rename, and 
-delete the photos that will be in the slideshow. Once they're uploaded, add `[simples_lideshow]` where you'd like the 
+delete the photos that will be in the slideshow. Once they're uploaded, add `[simples_slideshow]` where you'd like the 
 slideshow to appear in the page.
 
 There's no need to add the images individually to the post; Simple Slideshow automatically grabs all the images you've attached
@@ -52,7 +52,7 @@ check out the *documentation* tab on the Simple Slideshow page of your Administr
 
 That's great! This plugin is licensed under the [X11 license](http://www.xfree86.org/3.3.6/COPYRIGHT2.html#5), which means that you're free to 
 do pretty much anything you'd like with it. If you've got some changes you'd like to merge back into the plugin (for which I'll be grateful, and
-will send you a postcard as thanks), development is being hosted at [github](@TODO) - grab the most up-to-date source from there and send me a pull
+will send you a postcard as thanks), development is being hosted at [github](https://github.com/dlanger/simple-slideshow/) - grab the most up-to-date source from there and send me a pull
 request with your change.
 
 == Screenshots ==
