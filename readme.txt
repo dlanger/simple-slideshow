@@ -1,0 +1,72 @@
+=== Simple Slideshow ===
+Contributors: dlanger
+Donate link: http://daniellanger.com/blog
+Tags: slideshow, jquery, cycle, photos, photographs
+Requires at least: 3.0
+Tested up to: 3.2
+Stable tag: trunk
+
+Easily add a clean jQuery-powered slideshow to your site. Integrates well into any theme, easy to configure.
+
+== Description ==
+
+I was looking for a simple way to add a [jQuery Cycle](http://jquery.malsup.com/cycle/) slideshow to my posts. Something clean,
+that takes advantage of WordPress' built-in file-management system, and doesn't require learning all sorts of new templating
+and organization systems.
+
+I couldn't find one, so I wrote my own.
+
+Simple Slideshow is exactly what it says on the box. It's a plugin that's simple to deal with, and when used, produces a simple-looking
+slideshow that integrates well into any theme, and won't clash with other plugins. 
+
+If you have any problems with it, check out the [issue tracker](@TODO) and I'll try and help you figure it out. Most are
+caused by other incorrectly-coded themes or plugins, and can be easily solved. 
+
+== Installation ==
+
+@TODO
+
+== Frequently Asked Questions ==
+
+= How do I add a slideshow to a page? =
+
+First, you need to upload the images that you'd like in your slideshow. Use the built-in *media uploader* to do this; 
+while editing the post, click the small picture icon above the post you're editing to open it. From this screen you can add, edit, rename, and 
+delete the photos that will be in the slideshow. Once they're uploaded, add `[simpleslideshow]` where you'd like the 
+slideshow to appear in the page.
+
+There's no need to add the images individually to the post; Simple Slideshow automatically grabs all the images you've attached
+to the post and puts them in the show.
+
+= Where are the menu and settings for Simple Slideshow? = 
+
+Under the *Settings* section of the Administration section, on the page entitled *Simple Slideshow*.
+
+= How do I make the images change faster or slower? =
+
+The slideshow will advance when the forwards/backwards arrows are clicked. If you'd like to make the transition between images
+faster or slower, you can pass attributes to the shortcode - for example, `[simple_slideshow time="1000"]`@TODO. For full documentation on this, 
+check out the *documentation* tab on the Simple Slideshow page of your Administration section.
+
+= I want to improve/change/work on/modify Simple Slideshow =
+
+That's great! This plugin is licensed under the [X11 license](http://www.xfree86.org/3.3.6/COPYRIGHT2.html#5), which means that you're free to 
+do pretty much anything you'd like with it. If you've got some changes you'd like to merge back into the plugin (for which I'll be grateful, and
+will send you a postcard as thanks), development is being hosted at [github](@TODO) - grab the most up-to-date source from there and send me a pull
+request with your change.
+
+== Screenshots ==
+
+1. This screen shot description corresponds to screenshot-1.(png|jpg|jpeg|gif). Note that the screenshot is taken from
+the directory of the stable readme.txt, so in this case, `/tags/4.3/screenshot-1.png` (or jpg, jpeg, gif)
+2. This is the second screen shot
+
+== Changelog ==
+
+= 1.0 =
+* First public release.
+
+== Upgrade Notice ==
+
+= 1.0 =
+Initial upload to Wordpress.org.
