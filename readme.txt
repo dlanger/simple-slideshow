@@ -32,7 +32,7 @@ caused by other incorrectly-coded themes or plugins, and can be easily solved.
 
 First, you need to upload the images that you'd like in your slideshow. Use the built-in *media uploader* to do this; 
 while editing the post, click the small picture icon above the post you're editing to open it. From this screen you can add, edit, rename, and 
-delete the photos that will be in the slideshow. Once they're uploaded, add `[simpleslideshow]` where you'd like the 
+delete the photos that will be in the slideshow. Once they're uploaded, add `[simples_lideshow]` where you'd like the 
 slideshow to appear in the page.
 
 There's no need to add the images individually to the post; Simple Slideshow automatically grabs all the images you've attached
