@@ -144,10 +144,16 @@ to give it a positive review at Wordpress.org so that others can
 learn about it.</p>
 
 <p><b>Developers:</b> Got an idea on how to make Simple Slideshow better? Fork 
-it from <a href="#">GitHub</a> and send in a pull request!</p> 
+it from <a href="https://github.com/dlanger/simple-slideshow/">github</a> and send in a pull request!</p> 
 
 <script>
-	jQuery(function() { jQuery("#tabs").tabs(); });
+	jQuery(document).ready(function($){
+		var tablist = $("#tabs").tabs();
+		$("#show-instructions-tab").click(function(){
+			tablist.tabs('select', 1);
+			return false;
+		});
+	});
 </script>
 
 <div id="tabs">
@@ -160,9 +166,12 @@ it from <a href="#">GitHub</a> and send in a pull request!</p>
 		<p>
 			<form method="post" action="options.php">			
 				<p>Options set here become the <em>default</em>, but can still 
-				be changed on a per-show basis by using attributes. For more 
-				information about the meaning of each option, please click 
-				the 'Help' link above.</p>
+				be changed on a per-show basis by using attributes.</p> 
+				
+				<p>For more information about the meaning of each option, please click 
+				the <em>Help</em> button above. For instructions on how to set these options on
+				a per-show basis, consult the <em>Attributes</em> section of the 
+				<em><a href='#' id='show-instructions-tab'>Instructions</a></em> tab.</p>
 				<?php 
 					settings_fields( 'sss_settings' );
 					do_settings_sections( 'wp_simpleslideshow' );
@@ -176,7 +185,12 @@ it from <a href="#">GitHub</a> and send in a pull request!</p>
 	</div>
 	
 	<div id="tabs-2"> 
-		<p><?php echo $sss_tab_help; ?></p>
+		<p>
+			<?php 
+				global $sss_tab_help;
+				echo $sss_tab_help; 
+			?>
+		</p>
 	</div>
 
 </div>

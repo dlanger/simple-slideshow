@@ -19,8 +19,43 @@ image directly.</p>
 HELP;
 
 $sss_tab_help = <<<DOC
+<h3>Usage</h3>
+@TODO
+<h3>Attributes</h3>
 
-Yo.
+<p>Attributes allow you to change how an individual slideshow works; in effect, to override the options
+selected on the <em>Settings</em> tab on a per-show basis. If you don't specify an attribute - 
+for example, <code>[simple_slideshow]</code> has no attributes specified - the options selected 
+on the <em>Settings</em> tab will apply.</p>
+
+<p>You can have more than one custom attribute per slideshow - for example, if you want a show 
+to use large-sized images, for each slide to be a link, and for those links to point to the image 
+files themselves(no matter what the optsions specified on the <em>Settings</em> tab are), 
+you would use <code>[simple_slideshow size="large" link_click="1" link_target="direct"]</code>.</p>
+
+<p> For a fuller explanation of what each of these options change, please click the <em>Help</em>
+button located above.</p>
+
+<p>
+<b>size</b> - image size<br>
+Example: <code>[simple_slideshow size="medium"]</code><br>
+Values: <code>thumbnail</code>, <code>medium</code>, <code>large</code>
+</p>
+
+<b>transition_speed</b> - transition speed<br>
+Example: <code>[simple_slideshow transition_speed="100"]</code><br>
+Values: any integer between 10 and 1000, inclusive
+</p>
+
+<b>link_click</b> - click image<br>
+Example: <code>[simple_slideshow link_click="0"]</code><br>
+Values: <code>1</code> to enable, <code>0</code> to disable
+</p>
+
+<b>link_target</b> - link target<br>
+Example: <code>[simple_slideshow link_target="direct"]</code><br>
+Values: <code>direct</code> for the image file, <code>attach</code> for the themed attachment page
+</p>
 DOC;
 
 ?>
