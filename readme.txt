@@ -24,7 +24,11 @@ caused by other incorrectly-coded themes or plugins, and can be easily solved.
 
 == Installation ==
 
-@TODO
+1. Unzip `simple_slideshow.zip` into its own folder within the 
+`wp-content/plugins/` folder of your Wordpress installation. If you install
+Simple Slideshow through the administration menu of your blog, this step is done automatically for you. 
+
+2. Under the *Installed Plugins* menu (under *Plugins*), click *Activate* in the Simple Slideshow section.
 
 == Frequently Asked Questions ==
 
