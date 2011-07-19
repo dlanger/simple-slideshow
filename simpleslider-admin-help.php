@@ -30,7 +30,7 @@ on the <em>Settings</em> tab will apply.</p>
 
 <p>You can have more than one custom attribute per slideshow - for example, if you want a show 
 to use large-sized images, for each slide to be a link, and for those links to point to the image 
-files themselves(no matter what the optsions specified on the <em>Settings</em> tab are), 
+files themselves (no matter what the optsions specified on the <em>Settings</em> tab are), 
 you would use <code>[simple_slideshow size="large" link_click="1" link_target="direct"]</code>.</p>
 
 <p> For a fuller explanation of what each of these options change, please click the <em>Help</em>
