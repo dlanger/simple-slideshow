@@ -18,9 +18,30 @@ image directly.</p>
 
 HELP;
 
+$screenshot_1 = plugins_url( 'screenshot-1.png', __FILE__ );
+$screenshot_2 = plugins_url( 'screenshot-2.png', __FILE__ );
+
 $sss_tab_help = <<<DOC
 <h3>Usage</h3>
-@TODO
+<ol>
+<li>Bring up the <em>edit</em> screen of the post in which you'd like to insert a slideshow</li>
+
+<li>Click the photo icon (highlighted below) to open the <em>media uploader</em>, and use that mini-application 
+to upload and order all the images you'd like in the slideshow.
+<br> 
+<img src="${screenshot_1}">
+</li>
+
+<li><b>Don't</b> insert the images into the body of your post - instead, type <code>[simple_slideshow]</code> 
+into the body of the post where you'd like the slideshow to be. Don't worry if you don't see a slideshow
+appear - it only shows up when you're previewing and publishing the page. 
+<br>
+<img src="${screenshot_2}">
+</li>
+
+<li>That's it! If you want to tweak your slideshow with some attributes, read the next section.</li>
+</ol>
+
 <h3>Attributes</h3>
 
 <p>Attributes allow you to change how an individual slideshow works; in effect, to override the options
