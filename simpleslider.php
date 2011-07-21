@@ -10,6 +10,8 @@ Author URI: http://www.daniellanger.com
 License: FreeBSD
 */
 
+//@TODO Ordering - the order of pictures showsn doesn't correlate to the order selected in the media library
+
 require_once 'simpleslider-validate.php';
 
 register_activation_hook( __FILE__, 'sss_activation' );
