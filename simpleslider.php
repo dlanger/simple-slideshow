@@ -3,7 +3,7 @@
 /*
 Plugin Name: Simple Slideshow
 Plugin URI:	http://daniellanger.com/blog/simple-slideshow
-Description: @TODO
+Description: An easy-to use jQuery+Cycle Lite slideshow - just attach the images to your post using Wordpress' built-in media uploader, and add <code>[simple_slideshow]</code> to the body of your post where you'd like the slideshow to be.
 Version: 1.0
 Author: Daniel Langer
 Author URI: http://www.daniellanger.com

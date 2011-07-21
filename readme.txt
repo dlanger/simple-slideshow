@@ -12,9 +12,7 @@ Easily add a clean jQuery-powered slideshow to your site. Integrates well into a
 
 I was looking for a simple way to add a [jQuery Cycle Lite](http://jquery.malsup.com/cycle/lite/) slideshow to my posts. Something clean,
 that takes advantage of WordPress' built-in file-management system, and doesn't require learning all sorts of new templating
-and organization systems.
-
-I couldn't find one, so I wrote my own.
+and organization systems. I couldn't find one, so I wrote my own.
 
 Simple Slideshow is exactly what it says on the box. It's a plugin that's simple to deal with, and when used, produces a simple-looking
 slideshow that integrates well into any theme, and won't clash with other plugins. 
@@ -63,7 +61,7 @@ and the new order will be shown when you reload the post containing the slidesho
 
 = I want to improve/change/work on/modify Simple Slideshow =
 
-That's great! This plugin is licensed under the [X11 license](http://www.xfree86.org/3.3.6/COPYRIGHT2.html#5), which means that you're free to 
+That's great! This plugin is licensed under the [FreeBSD license](http://www.freebsd.org/copyright/freebsd-license.html), which means that you're free to 
 do pretty much anything you'd like with it. If you've got some changes you'd like to merge back into the plugin (for which I'll be grateful, and
 will send you a postcard as thanks), development is being hosted at [github](https://github.com/dlanger/simple-slideshow/) - grab the most up-to-date source from there and send me a pull
 request with your change.
