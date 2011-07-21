@@ -66,10 +66,10 @@ function sss_handle_shortcode( $attrs ) {
 		$defaults = sss_settings_defaults(NULL, true);
 
 	$default_attrs =  array( 'size' => $defaults[ 'size' ],
-						'link_click' => $defaults[ 'click' ],
-						'link_target' => $defaults[ 'target' ],
-						'show_counter' => $defaults[ 'counter' ],
-						'transition_speed' => $defaults[ 'speed' ] );
+						'link_click' => $defaults[ 'link_click' ],
+						'link_target' => $defaults[ 'link_target' ],
+						'show_counter' => $defaults[ 'show_counter' ],
+						'transition_speed' => $defaults[ 'transition_speed' ] );
 	
 	extract( sss_settings_validate( shortcode_atts( $default_attrs, 
 				$attrs ) ) );
@@ -77,6 +77,8 @@ function sss_handle_shortcode( $attrs ) {
 	$images =& get_children( 'post_type=attachment&post_mime_type=' .
 								'image&post_parent=' . get_the_ID() .
 								'&orderby=menu_order&order=ASC' ); 	
+	
+	return print_r($default_attrs, true);
 	
 	// Don't load anything or start processing if there are no 
 	// images to display.
