@@ -2,7 +2,7 @@
 
 /*
 Plugin Name: Simple Slideshow
-Plugin URI:	http://daniellanger.com/simpleslideshow
+Plugin URI:	http://daniellanger.com/blog/simple-slideshow
 Description: @TODO
 Version: 1.0
 Author: Daniel Langer

@@ -1,6 +1,6 @@
 === Simple Slideshow ===
 Contributors: dlanger
-Donate link: http://daniellanger.com/blog
+Donate link: http://daniellanger.com/blog/simple-slideshow
 Tags: slideshow, jquery, cycle, photos, photographs
 Requires at least: 3.0
 Tested up to: 3.2
@@ -10,7 +10,7 @@ Easily add a clean jQuery-powered slideshow to your site. Integrates well into a
 
 == Description ==
 
-I was looking for a simple way to add a [jQuery Cycle](http://jquery.malsup.com/cycle/) slideshow to my posts. Something clean,
+I was looking for a simple way to add a [jQuery Cycle Lite](http://jquery.malsup.com/cycle/lite/) slideshow to my posts. Something clean,
 that takes advantage of WordPress' built-in file-management system, and doesn't require learning all sorts of new templating
 and organization systems.
 
@@ -24,11 +24,14 @@ caused by other incorrectly-coded themes or plugins, and can be easily solved.
 
 == Installation ==
 
-1. Unzip `simple_slideshow.zip` into its own folder within the 
-`wp-content/plugins/` folder of your Wordpress installation. If you install
+1. Unzip `simple_slideshow.zip` into its own folder within the `wp-content/plugins/` folder of your Wordpress installation. If you install
 Simple Slideshow through the administration menu of your blog, this step is done automatically for you. 
 
-2. Under the *Installed Plugins* menu (under *Plugins*), click *Activate* in the Simple Slideshow section.
+2. Under the *Installed Plugins* menu (under *Plugins*), click *Activate* in the Simple Slideshow section - 
+this enables the plugin, and tells Wordpress that the shortcode you'll use to place a slideshow means something.
+
+3. That's it! Check out the *Instructions* tab on the Simple Slideshow menu (which you'll find in the *Settings*
+section of Wordpress' admin menu) for easy, three-step instructions on how to insert a slideshow in a post. 
 
 == Frequently Asked Questions ==
 
@@ -63,6 +66,7 @@ request with your change.
 
 1. This screen shot description corresponds to screenshot-1.(png|jpg|jpeg|gif). Note that the screenshot is taken from
 the directory of the stable readme.txt, so in this case, `/tags/4.3/screenshot-1.png` (or jpg, jpeg, gif)
+
 2. This is the second screen shot
 
 == Changelog ==

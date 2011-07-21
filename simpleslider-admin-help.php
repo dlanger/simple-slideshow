@@ -26,7 +26,7 @@ $sss_tab_help = <<<DOC
 <ol>
 <li>Bring up the <em>edit</em> screen of the post in which you'd like to insert a slideshow</li>
 
-<li>Click the photo icon (highlighted below) to open the <em>media uploader</em>, and use that mini-application 
+<li>Click the photo icon (highlighted below) to open the <em>media uploader</em>, and use that window 
 to upload and order all the images you'd like in the slideshow.
 <br> 
 <img src="${screenshot_1}">
