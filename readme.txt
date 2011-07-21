@@ -55,6 +55,12 @@ The slideshow will advance when the forwards/backwards arrows are clicked. If yo
 faster or slower, you can pass attributes to the shortcode - for example, `[simple_slideshow time="1000"]`@TODO. For full documentation on this, 
 check out the *documentation* tab on the Simple Slideshow page of your Administration section.
 
+= How do I change the order of images in the slideshow? =
+
+In the *media uploader*, go to the *Gallery* tab. There, drag the images up and down to put them in 
+the order you'd like them to be shown in (top to bottom). When you're done, press *Save all changes*,
+and the new order will be shown when you reload the post containing the slideshow.
+
 = I want to improve/change/work on/modify Simple Slideshow =
 
 That's great! This plugin is licensed under the [X11 license](http://www.xfree86.org/3.3.6/COPYRIGHT2.html#5), which means that you're free to 

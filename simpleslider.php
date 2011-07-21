@@ -10,8 +10,6 @@ Author URI: http://www.daniellanger.com
 License: FreeBSD
 */
 
-//@TODO Ordering - the order of pictures showsn doesn't correlate to the order selected in the media library
-
 require_once 'simpleslider-validate.php';
 
 register_activation_hook( __FILE__, 'sss_activation' );
@@ -77,7 +75,8 @@ function sss_handle_shortcode( $attrs ) {
 				$attrs ) ) );
 	
 	$images =& get_children( 'post_type=attachment&post_mime_type=' .
-								'image&post_parent=' . get_the_ID() ); 	
+								'image&post_parent=' . get_the_ID() .
+								'&orderby=menu_order&order=ASC' ); 	
 	
 	// Don't load anything or start processing if there are no 
 	// images to display.
