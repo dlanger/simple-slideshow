@@ -11,7 +11,7 @@ function sss_settings_validate( $inp ) {
 
 function sss_settings_defaults( $field, $return_all = false ){
 	$defs = array('size' => 'medium',
-					'transition_speed' => 100,
+					'transition_speed' => 400,
 					'link_click' => 0,
 					'link_target' => 'direct', 
 					'show_counter' => 1);
