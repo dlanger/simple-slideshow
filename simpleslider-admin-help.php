@@ -21,25 +21,47 @@ below the slideshow.</p>
 
 HELP;
 
-$screenshot_1 = plugins_url( 'screenshot-1.png', __FILE__ );
-$screenshot_2 = plugins_url( 'screenshot-2.png', __FILE__ );
+$media_uploader = plugins_url( 'images/uploader.png', __FILE__ );
+$before_upload = plugins_url( 'images/before_upload.png', __FILE__ );
+$after_upload = plugins_url( 'images/after_upload.png', __FILE__ );
+$gallery = plugins_url( 'images/gallery.png', __FILE__ );
+$close_window = plugins_url( 'images/close.png', __FILE__ );
+$code = plugins_url( 'images/code.png', __FILE__ );
 
 $sss_tab_help = <<<DOC
 <h3>Usage</h3>
 <ol>
 <li>Bring up the <em>edit</em> screen of the post in which you'd like to insert a slideshow</li>
 
-<li>Click the photo icon (highlighted below) to open the <em>media uploader</em>, and use that window 
-to upload and order all the images you'd like in the slideshow.
+<li>Click the photo icon to open the <em>media uploader</em>.
 <br> 
-<img src="${screenshot_1}">
+<img src="${media_uploader}">
 </li>
 
-<li><b>Don't</b> insert the images into the body of your post - instead, type <code>[simple_slideshow]</code> 
-into the body of the post where you'd like the slideshow to be. Don't worry if you don't see a slideshow
-appear - it only shows up when you're previewing and publishing the page. 
+<li>Click <em>select files</em> to pick the photos you'd like to upload and include in the slideshow. Once
+they're uploaded, the screen will look like the second photo. Click <em>Save all chages</em> (at the bottom).
+<br> 
+<img src="${before_upload}" style="padding-right: 10px; margin-right: 0px; vertical-align: top;"><img src="${after_upload}">
+</li>
+
+<li>Wordpress will now switch you to the <em>Gallery</em> tab - this is where you select the order the
+photos will be in. Drag-and-drop to rearrange their order; the slideshow will start at the top of the list. 
+When they're in the order you want, click <em>Save all changes</em> again (and don't worry about anything
+in the <em>Gallery Settings</em> section).
 <br>
-<img src="${screenshot_2}">
+<img src="${gallery}">
+</li>
+
+<li><b>Don't</b> click <em>Insert gallery</em> - instead, click the <em>X</em> in the top-right corner of
+the window (highlighted below) to get back to editing your post.
+<br>
+<img src="${close_window}">
+</li>
+
+<li>In the body of your post, type <code>[simple_slideshow]</code> where you'd like the slideshow to be. 
+Don't worry if you don't see a slideshow appear - it only shows up when you're previewing and publishing the page. 
+<br>
+<img src="${code}">
 </li>
 
 <li>That's it! If you want to tweak your slideshow with some attributes, read the next section.</li>

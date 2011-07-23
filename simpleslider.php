@@ -138,8 +138,6 @@ function sss_handle_shortcode( $attrs ) {
 	
 	// @TODO - style these controls a bit
 	
-	//@TODO - JS for the counter
-	
 	// Controls
 	if ( true == $show_counter ) 
 		$image_counter = "<span id=\"{$slider_show_id}_count\">1</span>" . 
