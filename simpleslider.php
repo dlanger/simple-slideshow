@@ -78,8 +78,6 @@ function sss_handle_shortcode( $attrs ) {
 								'image&post_parent=' . get_the_ID() .
 								'&orderby=menu_order&order=ASC' ); 	
 	
-	return print_r($default_attrs, true);
-	
 	// Don't load anything or start processing if there are no 
 	// images to display.
 	if( empty($images) ) 
@@ -97,11 +95,10 @@ function sss_handle_shortcode( $attrs ) {
 	$slider_show_id = 'simpleslider_show_' . get_the_ID();
 	$slider_show_number = get_the_ID();
 	
-	$resp = '<script>'.
-				'lp = {};'.
-				'lp["slides"] = ' . count( $images ) . ';' . 
-				"lp[\"transition_speed\"] = ${transition_speed};" .
-				"simpleslider_prefs[{$slider_show_number}] = lp;";
+	$resp = '<script type="text/javascript">'.
+				"simpleslider_prefs[{$slider_show_number}] = {".
+					'\'slides\' : ' . count( $images ) . ', '.
+					"'transition_speed' : ${transition_speed}};";
 	$resp .= '</script>' . "\n";
 	
 	$resp .= "<div class=\"simpleslider_show\" id=\"{$slider_show_id}\" " . 
