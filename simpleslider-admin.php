@@ -22,7 +22,9 @@ function sss_settings_init() {
 	add_settings_field( 'sss_link_target', 'Link target', 
 		'sss_settings_link_target', 'wp_simpleslideshow', 
 		'sss_settings_main');
-	//@TODO Add menu option for JS image counter
+	add_settings_field( 'sss_show_counter', 'Show image counter', 
+		'sss_settings_show_counter', 'wp_simpleslideshow', 
+		'sss_settings_main');
 }
 
 function sss_load_menu() {
@@ -109,6 +111,23 @@ function sss_settings_link_target() {
 	if( 'direct' == $curr )
 		echo 'selected ';
 	echo 'value="direct">Image file</option></select>';	
+}
+
+function sss_settings_show_counter($inp) {
+	$opts = get_option( 'sss_settings' );
+	$curr = sss_settings_defaults('show_counter');
+		
+	if( $opts and isset( $opts[ 'show_counter' ] ) )
+		$curr = $opts[ 'show_counter' ];
+	
+	echo '<select id="sss_show_counter" name="sss_settings[show_counter]">',
+			'<option ';
+	if( ! $curr )
+		echo 'selected ';
+	echo 'value="0">No</option><option ';
+	if( $curr )
+		echo 'selected ';
+	echo 'value="1">Yes</option></select>';	
 }
 
 // From http://www.wpmods.com/adding-plugin-action-links

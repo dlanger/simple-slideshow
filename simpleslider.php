@@ -66,10 +66,10 @@ function sss_handle_shortcode( $attrs ) {
 		$defaults = sss_settings_defaults(NULL, true);
 
 	$default_attrs =  array( 'size' => $defaults[ 'size' ],
-						'link_click' => $defaults[ 'click' ],
-						'link_target' => $defaults[ 'target' ],
-						'show_counter' => $defaults[ 'counter' ],
-						'transition_speed' => $defaults[ 'speed' ] );
+						'link_click' => $defaults[ 'link_click' ],
+						'link_target' => $defaults[ 'link_target' ],
+						'show_counter' => $defaults[ 'show_counter' ],
+						'transition_speed' => $defaults[ 'transition_speed' ] );
 	
 	extract( sss_settings_validate( shortcode_atts( $default_attrs, 
 				$attrs ) ) );
@@ -95,11 +95,10 @@ function sss_handle_shortcode( $attrs ) {
 	$slider_show_id = 'simpleslider_show_' . get_the_ID();
 	$slider_show_number = get_the_ID();
 	
-	$resp = '<script>'.
-				'lp = {};'.
-				'lp["slides"] = ' . count( $images ) . ';' . 
-				"lp[\"transition_speed\"] = ${transition_speed};" .
-				"simpleslider_prefs[{$slider_show_number}] = lp;";
+	$resp = '<script type="text/javascript">'.
+				"simpleslider_prefs[{$slider_show_number}] = {".
+					'\'slides\' : ' . count( $images ) . ', '.
+					"'transition_speed' : ${transition_speed}};";
 	$resp .= '</script>' . "\n";
 	
 	$resp .= "<div class=\"simpleslider_show\" id=\"{$slider_show_id}\" " . 

@@ -16,6 +16,9 @@ full-size version of the image. If this is disabled, clicking the current slides
 selects how the full-sized image will be displayed - either the themed Wordpress attachment page will be displayed, or the unstyled 
 image directly.</p>
 
+<p><b>Show Counter</b>: Whether or not to show a counter - e.g. <em>1/20</em>, to indicate the user is seeing the first of twenty images - 
+below the slideshow.</p> 
+
 HELP;
 
 $screenshot_1 = plugins_url( 'screenshot-1.png', __FILE__ );
@@ -76,6 +79,11 @@ Values: <code>1</code> to enable, <code>0</code> to disable
 <b>link_target</b> - link target<br>
 Example: <code>[simple_slideshow link_target="direct"]</code><br>
 Values: <code>direct</code> for the image file, <code>attach</code> for the themed attachment page
+</p>
+
+<b>show_counter</b> - image counter<br>
+Example: <code>[simple_slideshow show_counter="1"]</code><br>
+Values: <code>1</code> to enable, <code>0</code> to disable
 </p>
 DOC;
 
