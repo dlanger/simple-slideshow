@@ -168,8 +168,8 @@ it from <a href="https://github.com/dlanger/simple-slideshow/">github</a> and se
 <script>
 	jQuery(document).ready(function($){
 		var tablist = $("#tabs").tabs();
-		$("#show-instructions-tab").click(function(){
-			tablist.tabs('select', 1);
+		$("#show-attributes-tab").click(function(){
+			tablist.tabs('select', 2);
 		});
 	});
 </script>
@@ -178,6 +178,7 @@ it from <a href="https://github.com/dlanger/simple-slideshow/">github</a> and se
 	<ul>
 		<li><a href="#tabs-1">Settings</a></li>
 		<li><a href="#tabs-2">Instructions</a></li>
+		<li><a href="#tabs-3">Attributes</a></li>
 	</ul>
 
 	<div id="tabs-1">
@@ -188,8 +189,8 @@ it from <a href="https://github.com/dlanger/simple-slideshow/">github</a> and se
 				
 				<p>For more information about the meaning of each option, please click 
 				the <em>Help</em> button above. For instructions on how to set these options on
-				a per-show basis, consult the <em>Attributes</em> section of the 
-				<em><a href='#attributes' id='show-instructions-tab'>Instructions</a></em> tab.</p>
+				a per-show basis, consult the 
+				<em><a href='#' id='show-attributes-tab'>Attributes</a></em> tab.</p>
 				<?php 
 					settings_fields( 'sss_settings' );
 					do_settings_sections( 'simple_slideshow' );
@@ -207,6 +208,15 @@ it from <a href="https://github.com/dlanger/simple-slideshow/">github</a> and se
 			<?php 
 				global $sss_tab_help;
 				echo $sss_tab_help; 
+			?>
+		</p>
+	</div>
+	
+	<div id="tabs-3"> 
+		<p>
+			<?php 
+				global $sss_attribute_tab_help;
+				echo $sss_attribute_tab_help; 
 			?>
 		</p>
 	</div>

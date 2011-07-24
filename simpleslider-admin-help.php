@@ -72,9 +72,11 @@ Don't worry if you don't see a slideshow appear - it only shows up when you're p
 <img src="${code}">
 </li>
 
-<li>That's it! If you want to tweak your slideshow with some attributes, read the next section.</li>
+<li>That's it! If you want to tweak your slideshow with some attributes, read the next tab.</li>
 </ol>
-<a name='attributes'></a>
+DOC;
+
+$sss_attribute_tab_help = <<<DOC2
 <h3>Attributes</h3>
 
 <p>Attributes allow you to change how an individual slideshow works; in effect, to override the options
@@ -115,6 +117,6 @@ Values: <code>direct</code> for the image file, <code>attach</code> for the them
 Example: <code>[simple_slideshow show_counter="1"]</code><br>
 Values: <code>1</code> to enable, <code>0</code> to disable
 </p>
-DOC;
+DOC2;
 
 ?>
