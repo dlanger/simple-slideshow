@@ -170,7 +170,6 @@ it from <a href="https://github.com/dlanger/simple-slideshow/">github</a> and se
 		var tablist = $("#tabs").tabs();
 		$("#show-instructions-tab").click(function(){
 			tablist.tabs('select', 1);
-			return false;
 		});
 	});
 </script>
@@ -190,7 +189,7 @@ it from <a href="https://github.com/dlanger/simple-slideshow/">github</a> and se
 				<p>For more information about the meaning of each option, please click 
 				the <em>Help</em> button above. For instructions on how to set these options on
 				a per-show basis, consult the <em>Attributes</em> section of the 
-				<em><a href='#' id='show-instructions-tab'>Instructions</a></em> tab.</p>
+				<em><a href='#attributes' id='show-instructions-tab'>Instructions</a></em> tab.</p>
 				<?php 
 					settings_fields( 'sss_settings' );
 					do_settings_sections( 'wp_simpleslideshow' );

@@ -29,7 +29,15 @@ $close_window = plugins_url( 'images/close.png', __FILE__ );
 $code = plugins_url( 'images/code.png', __FILE__ );
 
 $sss_tab_help = <<<DOC
-<h3>Usage</h3>
+<h3>Executive Summary</h3>
+<ol>
+<li>Upload images into a post using the <em>media uploader</em>, and set their order on the 
+<em>Gallery</em> tab.</li>
+<li>Add <code>[simple_slideshow]</code> into the body of your post where you'd like the slideshow.</li>
+
+</ol>
+
+<h3>Detailed Instructions</h3>
 <ol>
 <li>Bring up the <em>edit</em> screen of the post in which you'd like to insert a slideshow</li>
 
@@ -66,7 +74,7 @@ Don't worry if you don't see a slideshow appear - it only shows up when you're p
 
 <li>That's it! If you want to tweak your slideshow with some attributes, read the next section.</li>
 </ol>
-
+<a name='attributes'></a>
 <h3>Attributes</h3>
 
 <p>Attributes allow you to change how an individual slideshow works; in effect, to override the options
