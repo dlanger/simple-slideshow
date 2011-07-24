@@ -17,7 +17,8 @@ and organization systems. I couldn't find one, so I wrote my own.
 Simple Slideshow is exactly what it says on the box. It's a plugin that's simple to deal with, and when used, produces a simple-looking
 slideshow that integrates well into any theme, and won't clash with other plugins. 
 
-If you have any problems with it, check out the [issue tracker](https://github.com/dlanger/simple-slideshow/issues) and I'll try and help you figure it out. Most are
+If you have any problems with it, check out the [issue tracker](https://github.com/dlanger/simple-slideshow/issues) or 
+post something in the WordPress [forums](http://wordpress.org/support/) and I'll try and help you figure it out. Most are
 caused by other incorrectly-coded themes or plugins, and can be easily solved. 
 
 == Installation ==
@@ -68,10 +69,14 @@ request with your change.
 
 == Screenshots ==
 
-1. This screen shot description corresponds to screenshot-1.(png|jpg|jpeg|gif). Note that the screenshot is taken from
-the directory of the stable readme.txt, so in this case, `/tags/4.3/screenshot-1.png` (or jpg, jpeg, gif)
+1. The Simple Slideshow control panel - documentation on how to change the individual shows on tabs, and contextual
+help on the meaning of each option from the drop-down at the top.
 
-2. This is the second screen shot
+2. A snippet from the step-by-step instructions (with screenshots) on how to use Simple Slideshow, found on the
+<em>Instructions</em> tab.
+
+3. An example slideshow - <code>[simple_slideshow size="medium" link_click="1"]</code>. Fonts, colors, and
+link decorations are all styled by the theme that's in use.
 
 == Changelog ==
 
