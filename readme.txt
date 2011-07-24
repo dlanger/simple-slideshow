@@ -29,7 +29,7 @@ Simple Slideshow through the administration menu of your blog, this step is done
 this enables the plugin, and tells Wordpress that the shortcode you'll use to place a slideshow means something.
 
 3. That's it! Check out the *Instructions* tab on the Simple Slideshow menu (which you'll find in the *Settings*
-section of Wordpress' admin menu) for easy, three-step instructions on how to insert a slideshow in a post. 
+section of Wordpress' admin menu) for easy instructions (with screenshots) on how to insert a slideshow in a post. 
 
 == Frequently Asked Questions ==
 

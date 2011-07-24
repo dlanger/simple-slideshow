@@ -3,7 +3,7 @@
 add_action( 'admin_init', 'sss_settings_init' );
 add_action( 'admin_menu', 'sss_load_menu' );
 add_filter( 'plugin_action_links', 'sss_add_action_link', 10, 2 );
-add_filter( 'contextual_help', 'sss_contextual_help_handler', 10, 3);
+add_filter( 'contextual_help', 'sss_contextual_help_handler', 10, 3 );
 
 require_once 'simpleslider-admin-help.php';
 
@@ -41,13 +41,13 @@ function sss_settings_text() {
 }
 
 // From http://codex.wordpress.org/Adding_Contextual_Help_to_Administration_Menus
-function sss_contextual_help_handler( $contextual_help, $screen_id, $screen) {
+function sss_contextual_help_handler( $contextual_help, $screen_id, $screen ) {
 	global $sss_menu_hook_name, $sss_contextual_help;
 	
 	if( $screen_id == $sss_menu_hook_name ) 
-		$help = $sss_contextual_help;
+		$contextual_help = $sss_contextual_help;
 	
-	return $help;
+	return $contextual_help;
 }
 
 function sss_settings_size() {
