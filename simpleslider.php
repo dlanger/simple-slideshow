@@ -136,8 +136,6 @@ function sss_handle_shortcode( $attrs ) {
 	
 	$resp .= "</div>\n";
 	
-	// @TODO - style these controls a bit
-	
 	// Controls
 	if ( true == $show_counter ) 
 		$image_counter = "<span id=\"{$slider_show_id}_count\">1</span>" . 
@@ -148,10 +146,10 @@ function sss_handle_shortcode( $attrs ) {
 	$resp .= "<div style=\"width: {$thumb_w}px; \" " .
 				"class=\"simpleslider_controls\">";
 	$resp .= "<a href=\"#\" id=\"{$slider_show_id}_prev\" " . 
-				"title=\"Previous Image\" class=\"simpleslider_link\"><</a> " .
+				"title=\"Previous Image\" class=\"simpleslider_link\">◄ Prev.</a> " .
 				"&nbsp; ${image_counter} " . 
 				"&nbsp; <a href=\"#\" id=\"{$slider_show_id}_next\" " .
-				"title=\"Next Image\" class=\"simpleslider_link\">></a>";
+				"title=\"Next Image\" class=\"simpleslider_link\">Next ►</a>";
 	$resp .= "</div>\n";
 
 	return $resp;
