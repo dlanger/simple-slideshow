@@ -10,27 +10,27 @@ require_once 'simpleslider-admin-help.php';
 function sss_settings_init() {
 	register_setting( 'sss_settings', 'sss_settings', 'sss_settings_validate');
 	add_settings_section( 'sss_settings_main', '', 
-		'sss_settings_text', 'wp_simpleslideshow' );
+		'sss_settings_text', 'simple_slideshow' );
 	add_settings_field( 'sss_size', 'Image size', 'sss_settings_size', 
-		'wp_simpleslideshow', 'sss_settings_main');
+		'simple_slideshow', 'sss_settings_main');
 	add_settings_field( 'sss_transition_speed', 'Transition speed', 
-		'sss_settings_transition_speed', 'wp_simpleslideshow', 
+		'sss_settings_transition_speed', 'simple_slideshow', 
 		'sss_settings_main');
 	add_settings_field( 'sss_link_click', 'Click image to open full-size ' . 
 		'version in a new window', 'sss_settings_link_click', 
-		'wp_simpleslideshow', 'sss_settings_main');
+		'simple_slideshow', 'sss_settings_main');
 	add_settings_field( 'sss_link_target', 'Link target', 
-		'sss_settings_link_target', 'wp_simpleslideshow', 
+		'sss_settings_link_target', 'simple_slideshow', 
 		'sss_settings_main');
 	add_settings_field( 'sss_show_counter', 'Show image counter', 
-		'sss_settings_show_counter', 'wp_simpleslideshow', 
+		'sss_settings_show_counter', 'simple_slideshow', 
 		'sss_settings_main');
 }
 
 function sss_load_menu() {
 	global $sss_menu_hook_name;
 	$sss_menu_hook_name = add_options_page( 'Simple Slideshow Settings', 'Simple Slideshow', 
-		'manage_options', 'wp_simpleslideshow', 'sss_admin_menu');
+		'manage_options', 'simple_slideshow', 'sss_admin_menu');
 }
 
 function sss_settings_text() {
@@ -141,7 +141,7 @@ function sss_add_action_link( $links, $file ){
 	
 	if( $file == $this_plugin ) {
 		$settings_link = '<a href="' . get_bloginfo( 'wpurl' ) . '/wp-admin' . 
-			'/options-general.php?page=wp_simpleslideshow">Settings</a>';
+			'/options-general.php?page=simple_slideshow">Settings</a>';
 		array_unshift( $links, $settings_link );
 	}
 	return $links;
@@ -192,7 +192,7 @@ it from <a href="https://github.com/dlanger/simple-slideshow/">github</a> and se
 				<em><a href='#attributes' id='show-instructions-tab'>Instructions</a></em> tab.</p>
 				<?php 
 					settings_fields( 'sss_settings' );
-					do_settings_sections( 'wp_simpleslideshow' );
+					do_settings_sections( 'simple_slideshow' );
 				?>
 				
 				<p class="submit">
