@@ -13,7 +13,7 @@ License: FreeBSD
 require_once 'simpleslider-validate.php';
 
 register_activation_hook( __FILE__, 'sss_activation' );
-register_deactivation_hook( __FILE__, 'sss_uninstall' );
+register_uninstall_hook( __FILE__, 'sss_uninstall' ); 
 add_shortcode( 'simple_slideshow', 'sss_handle_shortcode' );
 add_action( 'init', 'sss_load_externals' );
 
