@@ -4,7 +4,7 @@ Donate link: http://daniellanger.com/blog/simple-slideshow
 Tags: slideshow, jquery, cycle, photos, photographs
 Requires at least: 3.0
 Tested up to: 3.2
-Stable tag: trunk
+Stable tag: 1.0
 
 Easily add a clean jQuery-powered slideshow to your site. Integrates well into any theme, easy to configure.
 
