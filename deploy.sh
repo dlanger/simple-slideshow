@@ -1,5 +1,5 @@
 #! /bin/bash
-# From https://github.com/thenbrent/multisite-user-management/deploy.sh
+# From https://github.com/thenbrent/multisite-user-management/blob/master/deploy.sh
 #
 # A modification of Dean Clatworthy's deploy script as found here: https://github.com/deanc/wordpress-plugin-git-svn
 # The difference is that this script lives in the plugin's git repo & doesn't require an existing SVN repo.
