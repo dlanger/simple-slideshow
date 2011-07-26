@@ -34,6 +34,7 @@ function sss_uninstall() {
 
 function sss_load_externals() {
 	if ( is_admin() ) {
+
 		wp_enqueue_script( 'jquery-ui-core' );
 		wp_enqueue_script( 'jquery-ui-tabs' );
 		wp_register_style( 'simpleslider_admin', plugins_url(
@@ -42,10 +43,6 @@ function sss_load_externals() {
 		return;
 	}
 	
-	// Load jQuery Cycle Lite locally, and jQuery from the Google CDN
-	wp_deregister_script( 'jquery' );
-	wp_register_script( 'jquery', 'https://ajax.googleapis.com/ajax/libs/' . 
-		'jquery/1.6.0/jquery.min.js', false, null, false );
 	wp_register_script( 'mini_cycle', plugins_url( 
 		'jquery.cycle.lite.1.1.min.js', __FILE__ ), array( 'jquery' ), 
 		'1.1', true );
