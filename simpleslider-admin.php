@@ -150,7 +150,7 @@ function sss_add_action_link( $links, $file ){
 function sss_admin_menu() {
 	if ( ! current_user_can( 'manage_options' ) ) {
 		wp_die( __( 'You do not have sufficient privileges to access this ' .
-			'page. Please contact your administrator.' ) );
+			'page. Please contact your administrator.' , 'simple_slideshow') );
 	}
 ?>
 

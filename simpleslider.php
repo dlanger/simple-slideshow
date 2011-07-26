@@ -4,9 +4,10 @@
 Plugin Name: Simple Slideshow
 Plugin URI:	http://daniellanger.com/blog/simple-slideshow
 Description: An easy-to use jQuery+Cycle Lite slideshow - just attach the images to your post using Wordpress' built-in media uploader, and add <code>[simple_slideshow]</code> to the body of your post where you'd like the slideshow to be.
-Version: 1.0
+Version: 1.0.1
 Author: Daniel Langer
 Author URI: http://www.daniellanger.com
+Text Domain: simple_slideshow
 License: FreeBSD
 */
 
@@ -54,6 +55,8 @@ function sss_load_externals() {
 	wp_enqueue_script( 'simpleslider' );		
 	wp_enqueue_script( 'jquery' );
 	wp_enqueue_script( 'mini_cycle' );
+	load_plugin_textdomain( 'simple_slideshow', false, basename( 
+		dirname( __FILE__ ) ) );
 }
 
 
@@ -143,12 +146,14 @@ function sss_handle_shortcode( $attrs ) {
 	$resp .= "<div style=\"width: {$thumb_w}px; \" " .
 				"class=\"simpleslider_controls\">";
 	$resp .= "<a href=\"#\" id=\"{$slider_show_id}_prev\" " . 
-				"title=\"Previous Image\" class=\"simpleslider_link\">◄ Prev.</a> " .
+				"title=\"Previous Image\" class=\"simpleslider_link\">◄ " . 
+				__( 'Prev.', 'simple_slideshow' ) . "</a> " .
 				"&nbsp; ${image_counter} " . 
 				"&nbsp; <a href=\"#\" id=\"{$slider_show_id}_next\" " .
-				"title=\"Next Image\" class=\"simpleslider_link\">Next ►</a>";
+				"title=\"Next Image\" class=\"simpleslider_link\">" .
+				__( 'Next', 'simple_slideshow' ) . " ►</a>";
 	$resp .= "</div>\n";
-
+	
 	return $resp;
 }
 ?>
