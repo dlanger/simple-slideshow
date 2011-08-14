@@ -14,7 +14,6 @@ jQuery(document).ready(function($){
 			next: '#simpleslider_show_' + k + '_next',
 			prev: '#simpleslider_show_' + k + '_prev',
 		});
-		t_show.children().css('display', 'block');
 		attach_counter(k, v['slides']);
 	});
 	

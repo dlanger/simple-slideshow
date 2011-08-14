@@ -117,15 +117,11 @@ function sss_handle_shortcode( $attrs ) {
 	
 	$first = true;
 	foreach ( $images as $image_id => $image_data ) {
-		// To prevent flash of unstyled content, we set all slideshow
-		// elements aside from the first one to be hidden. JS
-		// in document.onready then sets them back to block once
-		// cycle has done its setup and set the opacities.
-		$display_style = $first ? 'block' : 'none'; 
+		$opacity = $first ? '1' : '0'; 
 		$first = false;
 		$image_tag = wp_get_attachment_image( $image_id, $size );
 		
-		$resp .= "<div style=\"display: {$display_style}\">";
+		$resp .= "<div style=\"opacity: {$opacity}\">";
 						
 		if ( 1 == $link_click ){	
 			if ( 'direct' == $link_target ) {
