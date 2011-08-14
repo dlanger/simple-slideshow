@@ -16,12 +16,6 @@ function sss_settings_init() {
 	add_settings_field( 'sss_transition_speed', 'Transition speed', 
 		'sss_settings_transition_speed', 'simple_slideshow', 
 		'sss_settings_main');
-	add_settings_field( 'sss_cycle_version', 'Cycle version', 
-		'sss_settings_cycle_version', 'simple_slideshow', 
-		'sss_settings_main');
-	add_settings_field( 'sss_transition', 'Transition effect', 
-		'sss_settings_transition', 'simple_slideshow', 
-		'sss_settings_main');
 	add_settings_field( 'sss_link_click', 'Click image to open full-size ' . 
 		'version in a new window', 'sss_settings_link_click', 
 		'simple_slideshow', 'sss_settings_main');
@@ -30,6 +24,12 @@ function sss_settings_init() {
 		'sss_settings_main');
 	add_settings_field( 'sss_show_counter', 'Show image counter', 
 		'sss_settings_show_counter', 'simple_slideshow', 
+		'sss_settings_main');
+	add_settings_field( 'sss_cycle_version', 'Cycle version', 
+		'sss_settings_cycle_version', 'simple_slideshow', 
+		'sss_settings_main');
+	add_settings_field( 'sss_transition', 'Transition effect', 
+		'sss_settings_transition', 'simple_slideshow', 
 		'sss_settings_main');
 }
 
@@ -203,6 +203,11 @@ jQuery(document).ready(function($){
 			transition_field.attr('disabled', false);
 		}
 	});
+
+	var tablist = $("#tabs").tabs();
+	$("#show-attributes-tab").click(function(){
+		tablist.tabs('select', 2);
+	});
 });
 </script>
 
@@ -217,15 +222,6 @@ learn about it.</p>
 
 <p><b>Developers:</b> Got an idea on how to make Simple Slideshow better? Fork 
 it from <a href="https://github.com/dlanger/simple-slideshow/">github</a> and send in a pull request!</p> 
-
-<script>
-	jQuery(document).ready(function($){
-		var tablist = $("#tabs").tabs();
-		$("#show-attributes-tab").click(function(){
-			tablist.tabs('select', 2);
-		});
-	});
-</script>
 
 <div id="tabs">
 	<ul>
