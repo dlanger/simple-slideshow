@@ -1,6 +1,6 @@
 # Simple Slideshow #
 
-A simple, no-fuss jQuery + Cycle Lite plugin for Wordpress.
+A simple, no-fuss jQuery + Cycle (regular or Lite) plugin for Wordpress.
 
 ## Usage ##
 

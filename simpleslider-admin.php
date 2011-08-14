@@ -195,6 +195,7 @@ function sss_admin_menu() {
 ?>
 <script type="text/javascript">
 jQuery(document).ready(function($){
+
 	var transition_field = $('#sss_transition');
 	$('#sss_cycle_version').change(function(e){
 		if($(e.target).val() == 'lite'){
@@ -208,6 +209,40 @@ jQuery(document).ready(function($){
 	$("#show-attributes-tab").click(function(){
 		tablist.tabs('select', 2);
 	});
+
+	var transitions = [
+		'blindX',
+		'blindY',
+		'blindZ',
+		'cover',
+		'curtainX',
+		'curtainY',
+		'fade',
+		'fadeZoom',
+		'growX',
+		'growY',
+		'none',
+		'scrollUp',
+		'scrollDown',
+		'scrollLeft',
+		'scrollRight',
+		'scrollHorz',
+		'scrollVert',
+		'shuffle',
+		'slideX',
+		'slideY',
+		'toss',
+		'turnUp',
+		'turnDown',
+		'turnLeft',
+		'turnRight',
+		'uncover',
+		'wipe',
+		'zoom'];
+
+		$('#sss_transition').autocomplete({
+			source: transitions
+		});
 });
 </script>
 

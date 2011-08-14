@@ -19,6 +19,14 @@ image directly.</p>
 <p><b>Show Counter</b>: Whether or not to show a counter - e.g. <em>1/20</em>, to indicate the user is seeing the first of twenty images - 
 below the slideshow.</p> 
 
+<p><b>Cycle Version</b>: The jQuery Cycle version to use. If <em>Lite</em> is selected, the <em>jQuery Cycle Lite</em> (4Kb)
+script will be loaded, and only the <em>fade</em> transition will be available. If <em>All</em> is selected, the full <em>jQuery Cycle</em> (30Kb)
+script will be loaded, and all transitions will be available. This option is set on a per-site basis only.</p>
+
+<p><b>Transition Effect</b>: The effect to use when transitioning between slides. Anything that can be passed
+to the <em>fx</em> parameter of a jQuery Cycle show - listed <a href="http://jquery.malsup.com/cycle/browser.html" target="_new">here</a> - is valid.
+If <em>Cycle Version</em> is set to <em>Lite</em>, this value is locked to <em>fade</em>.
+
 HELP;
 
 $media_uploader = plugins_url( 'images/uploader.png', __FILE__ );
@@ -116,6 +124,12 @@ Values: <code>direct</code> for the image file, <code>attach</code> for the them
 <b>show_counter</b> - image counter<br>
 Example: <code>[simple_slideshow show_counter="1"]</code><br>
 Values: <code>1</code> to enable, <code>0</code> to disable
+</p>
+
+<b>transition</b> - transition effect<br>
+Example: <code>[simple_slideshow transition="toss"]</code><br>
+Values: Any effect listed <a href="http://jquery.malsup.com/cycle/browser.html" target="_new">here</a>.<br>
+Note: If <em>Cycle Version</em> on the <em>Settings</em> tab is set to <em>Lite</em>, this attribute is ignored
 </p>
 DOC2;
 
