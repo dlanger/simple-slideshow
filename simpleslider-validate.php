@@ -6,6 +6,10 @@ function sss_settings_validate( $inp ) {
 	foreach( $fields as $field )
 		$safe_inp[ $field ] = call_user_func( 'sss_settings_' . $field . 
 			'_val', $inp[ $field ] );	
+		
+	if( 'lite' == $safe_inp[ 'cycle_version' ] )
+		$safe_inp[ 'transition' ] = 'fade';
+		
 	return $safe_inp;
 }
 
