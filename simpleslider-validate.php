@@ -6,10 +6,6 @@ function sss_settings_validate( $inp ) {
 	foreach( $fields as $field )
 		$safe_inp[ $field ] = call_user_func( 'sss_settings_' . $field . 
 			'_val', $inp[ $field ] );	
-		
-	if( 'lite' == $safe_inp[ 'cycle_version' ] )
-		$safe_inp[ 'transition' ] = 'fade';
-		
 	return $safe_inp;
 }
 
@@ -20,8 +16,7 @@ function sss_settings_defaults( $field, $return_all = false ){
 					'link_target' => 'direct', 
 					'show_counter' => 1, 
 					'cycle_version' => 'lite',
-					'transition' => 'fade'
-					
+					'transition' => 'fade'	
 	);
 	if( $return_all )
 		return $defs;
@@ -37,7 +32,18 @@ function sss_settings_cycle_version_val( $inp ){
 }
 
 function sss_settings_transition_val( $inp ){
-	if( ctype_alpha( $inp ) )
+	// Validity of transition depends on the value of cycle_type
+	// (if cycle_type == 'lite', the only valid value for 
+	/// transition is 'fade'), so we look it up.
+	$opts = get_option( 'sss_settings' );
+	$cycle_type = sss_settings_defaults( 'cycle_type' );
+		
+	if( $opts and isset( $opts[ 'cycle_type' ] ) )
+		$cycle_type = $opts[ 'cycle_type' ];
+	
+	if( 'lite' == $cycle_type )
+		return 'fade';
+	elseif( ctype_alpha( $inp ) )
 		return $inp;
 	else 
 		return sss_settings_defaults( 'transition' );

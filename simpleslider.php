@@ -38,6 +38,7 @@ function sss_load_externals() {
 
 		wp_enqueue_script( 'jquery-ui-core' );
 		wp_enqueue_script( 'jquery-ui-tabs' );
+		wp_enqueue_script( 'jquery' );
 		wp_register_style( 'simpleslider_admin', plugins_url(
 			'simpleslider-admin.css', __FILE__ ), false, 1.0);
 		wp_enqueue_style( 'simpleslider_admin');
@@ -81,7 +82,7 @@ function sss_handle_shortcode( $attrs ) {
 						'link_target' => $defaults[ 'link_target' ],
 						'show_counter' => $defaults[ 'show_counter' ],
 						'transition_speed' => $defaults[ 'transition_speed' ],
-						'transition' => $defaults[ 'transition']);
+						'transition' => $defaults[ 'transition' ]);
 	
 	extract( sss_settings_validate( shortcode_atts( $default_attrs, 
 				$attrs ) ) );

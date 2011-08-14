@@ -94,8 +94,13 @@ function sss_settings_transition() {
 		$curr = $opts[ 'transition' ];
 		
 	echo '<input type="text" value="', $curr, 
-			'" id="sss_transition_speed" ',
-			'name="sss_settings[transition]">';
+			'" id="sss_transition" ',
+			'name="sss_settings[transition]"';
+	
+	if ( 'lite' == $opts[ 'cycle_version' ] )
+		echo ' disabled ';
+	
+	echo '>';
 }
 
 function sss_settings_link_click() {
@@ -148,7 +153,7 @@ function sss_settings_link_target() {
 	echo 'value="direct">Image file</option></select>';	
 }
 
-function sss_settings_show_counter($inp) {
+function sss_settings_show_counter() {
 	$opts = get_option( 'sss_settings' );
 	$curr = sss_settings_defaults( 'show_counter' );
 		
@@ -188,6 +193,19 @@ function sss_admin_menu() {
 			'page. Please contact your administrator.' , 'simple_slideshow') );
 	}
 ?>
+<script type="text/javascript">
+jQuery(document).ready(function($){
+	var transition_field = $('#sss_transition');
+	$('#sss_cycle_version').change(function(e){
+		if($(e.target).val() == 'lite'){
+			transition_field.attr('disabled', true).val('fade');
+		} else {
+			transition_field.attr('disabled', false);
+		}
+	});
+});
+</script>
+
 
 <div class="wrap">
 <div id="icon-options-general" class="icon32"></div>
