@@ -10,7 +10,7 @@ Easily add a clean jQuery-powered slideshow to your site. Integrates well into a
 
 == Description ==
 
-I was looking for a simple way to add a [jQuery Cycle Lite](http://jquery.malsup.com/cycle/lite/) slideshow to my posts. Something clean,
+I was looking for a simple way to add a [jQuery Cycle](http://jquery.malsup.com/cycle/) slideshow to my posts. Something clean,
 that takes advantage of WordPress' built-in file-management system, and doesn't require learning all sorts of new templating
 and organization systems. I couldn't find one, so I wrote my own.
 
@@ -60,6 +60,18 @@ In the *media uploader*, go to the *Gallery* tab. There, drag the images up and 
 the order you'd like them to be shown in (top to bottom). When you're done, press *Save all changes*,
 and the new order will be shown when you reload the post containing the slideshow.
 
+= What's all this about different Cycle versions? =
+
+Simple Slideshow supports two versions of the Cycle plugin - `Cycle All` and `Cycle Lite`. If you're only looking to have your photos
+fade into one another, `Cycle Lite` is fine for you - plus, it's a smaller file, so it will download faster for
+your users. If you're looking for a fancier image transition, you'll need to load the `Cycle All` plugin.
+
+= How do I use fancier image transitions? = 
+
+If you'd like to use one of the transitions listed (here)[http://jquery.malsup.com/cycle/browser.html], all you have to do
+is set the *Cycle Version* option (in the *Settings* menu) to *All*. Then you can set the transition effect like any other option - 
+set a default one on the *Settings* menu, and then customize it on a per-slideshow basis if you'd like.  
+
 = I want to improve/change/work on/modify Simple Slideshow =
 
 That's great! This plugin is licensed under the [FreeBSD license](http://www.freebsd.org/copyright/freebsd-license.html), which means that you're free to 
@@ -83,9 +95,10 @@ link decorations are all styled by the theme that's in use.
 = 1.0 =
 * First public release.
 
-= 1.0.1 = 
+= 1.1 = 
 * Added internationalization support.
 * Switched jQuery to local (from Google CDN) version.
+* Added support for using the full Cycle plugin
 
 == Upgrade Notice ==
 
@@ -93,4 +106,4 @@ link decorations are all styled by the theme that's in use.
 Initial upload to Wordpress.org.
 
 = 1.0.1 = 
-This version adds support for internationalization, and includes the POT file for translation.
+This version allows the use of all Cycle translations, as opposed to just a fade. It also adds support for internationalization.

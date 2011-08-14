@@ -25,6 +25,12 @@ function sss_settings_init() {
 	add_settings_field( 'sss_show_counter', 'Show image counter', 
 		'sss_settings_show_counter', 'simple_slideshow', 
 		'sss_settings_main');
+	add_settings_field( 'sss_cycle_version', 'Cycle version', 
+		'sss_settings_cycle_version', 'simple_slideshow', 
+		'sss_settings_main');
+	add_settings_field( 'sss_transition', 'Transition effect', 
+		'sss_settings_transition', 'simple_slideshow', 
+		'sss_settings_main');
 }
 
 function sss_load_menu() {
@@ -80,9 +86,26 @@ function sss_settings_transition_speed() {
 			'name="sss_settings[transition_speed]">';
 }
 
+function sss_settings_transition() {
+	$opts = get_option( 'sss_settings' );
+	$curr = sss_settings_defaults( 'transition' );
+		
+	if( $opts and isset( $opts[ 'transition' ] ) )
+		$curr = $opts[ 'transition' ];
+		
+	echo '<input type="text" value="', $curr, 
+			'" id="sss_transition" ',
+			'name="sss_settings[transition]"';
+	
+	if ( 'lite' == $opts[ 'cycle_version' ] )
+		echo ' disabled ';
+	
+	echo '>';
+}
+
 function sss_settings_link_click() {
 	$opts = get_option( 'sss_settings' );
-	$curr = sss_settings_defaults('link_click');
+	$curr = sss_settings_defaults( 'link_click' );
 		
 	if( $opts and isset( $opts[ 'link_click' ] ) )
 		$curr = $opts[ 'link_click' ];
@@ -97,9 +120,26 @@ function sss_settings_link_click() {
 	echo 'value="1">Yes</option></select>';	
 }
 
+function sss_settings_cycle_version() {
+	$opts = get_option( 'sss_settings' );
+	$curr = sss_settings_defaults( 'cycle_version' );
+	
+	if( $opts and isset( $opts[ 'cycle_version' ] ) )
+		$curr = $opts[ 'cycle_version' ];
+		
+	echo '<select id="sss_cycle_version" name="sss_settings[cycle_version]">',
+			'<option ';
+	if( 'lite' == $curr )
+		echo 'selected ';
+	echo 'value="lite">Lite</option><option ';
+	if( 'all' == $curr )
+		echo 'selected ';
+	echo 'value="all">All</option></select>';	
+}
+
 function sss_settings_link_target() {
 	$opts = get_option( 'sss_settings' );
-	$curr = sss_settings_defaults('link_target');
+	$curr = sss_settings_defaults( 'link_target' );
 		
 	if( $opts and isset( $opts[ 'link_target' ] ) )
 		$curr = $opts[ 'link_target' ];
@@ -113,9 +153,9 @@ function sss_settings_link_target() {
 	echo 'value="direct">Image file</option></select>';	
 }
 
-function sss_settings_show_counter($inp) {
+function sss_settings_show_counter() {
 	$opts = get_option( 'sss_settings' );
-	$curr = sss_settings_defaults('show_counter');
+	$curr = sss_settings_defaults( 'show_counter' );
 		
 	if( $opts and isset( $opts[ 'show_counter' ] ) )
 		$curr = $opts[ 'show_counter' ];
@@ -153,6 +193,59 @@ function sss_admin_menu() {
 			'page. Please contact your administrator.' , 'simple_slideshow') );
 	}
 ?>
+<script type="text/javascript">
+jQuery(document).ready(function($){
+
+	var transition_field = $('#sss_transition');
+	$('#sss_cycle_version').change(function(e){
+		if($(e.target).val() == 'lite'){
+			transition_field.attr('disabled', true).val('fade');
+		} else {
+			transition_field.attr('disabled', false);
+		}
+	});
+
+	var tablist = $("#tabs").tabs();
+	$("#show-attributes-tab").click(function(){
+		tablist.tabs('select', 2);
+	});
+
+	var transitions = [
+		'blindX',
+		'blindY',
+		'blindZ',
+		'cover',
+		'curtainX',
+		'curtainY',
+		'fade',
+		'fadeZoom',
+		'growX',
+		'growY',
+		'none',
+		'scrollUp',
+		'scrollDown',
+		'scrollLeft',
+		'scrollRight',
+		'scrollHorz',
+		'scrollVert',
+		'shuffle',
+		'slideX',
+		'slideY',
+		'toss',
+		'turnUp',
+		'turnDown',
+		'turnLeft',
+		'turnRight',
+		'uncover',
+		'wipe',
+		'zoom'];
+
+		$('#sss_transition').autocomplete({
+			source: transitions
+		});
+});
+</script>
+
 
 <div class="wrap">
 <div id="icon-options-general" class="icon32"></div>
@@ -164,15 +257,6 @@ learn about it.</p>
 
 <p><b>Developers:</b> Got an idea on how to make Simple Slideshow better? Fork 
 it from <a href="https://github.com/dlanger/simple-slideshow/">github</a> and send in a pull request!</p> 
-
-<script>
-	jQuery(document).ready(function($){
-		var tablist = $("#tabs").tabs();
-		$("#show-attributes-tab").click(function(){
-			tablist.tabs('select', 2);
-		});
-	});
-</script>
 
 <div id="tabs">
 	<ul>
