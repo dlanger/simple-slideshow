@@ -19,6 +19,9 @@ function sss_settings_init() {
 	add_settings_field( 'sss_cycle_version', 'Cycle version', 
 		'sss_settings_cycle_version', 'simple_slideshow', 
 		'sss_settings_main');
+	add_settings_field( 'sss_transition', 'Transition effect', 
+		'sss_settings_transition', 'simple_slideshow', 
+		'sss_settings_main');
 	add_settings_field( 'sss_link_click', 'Click image to open full-size ' . 
 		'version in a new window', 'sss_settings_link_click', 
 		'simple_slideshow', 'sss_settings_main');
@@ -81,6 +84,18 @@ function sss_settings_transition_speed() {
 	echo '<input type="number" min="10" max="1000" step="10" value="', 
 			$curr, '" id="sss_transition_speed" ',
 			'name="sss_settings[transition_speed]">';
+}
+
+function sss_settings_transition() {
+	$opts = get_option( 'sss_settings' );
+	$curr = sss_settings_defaults( 'transition' );
+		
+	if( $opts and isset( $opts[ 'transition' ] ) )
+		$curr = $opts[ 'transition' ];
+		
+	echo '<input type="text" value="', $curr, 
+			'" id="sss_transition_speed" ',
+			'name="sss_settings[transition]">';
 }
 
 function sss_settings_link_click() {

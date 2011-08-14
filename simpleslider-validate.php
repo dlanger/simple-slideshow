@@ -15,7 +15,10 @@ function sss_settings_defaults( $field, $return_all = false ){
 					'link_click' => 0,
 					'link_target' => 'direct', 
 					'show_counter' => 1, 
-					'cycle_version' => 'lite');
+					'cycle_version' => 'lite',
+					'transition' => 'fade'
+					
+	);
 	if( $return_all )
 		return $defs;
 	else
@@ -27,6 +30,13 @@ function sss_settings_cycle_version_val( $inp ){
 		return $inp;
 	else 
 		return sss_settings_defaults( 'cycle_version' );
+}
+
+function sss_settings_transition_val( $inp ){
+	if( ctype_alpha( $inp ) )
+		return $inp;
+	else 
+		return sss_settings_defaults( 'transition' );
 }
 
 function sss_settings_size_val( $inp ){

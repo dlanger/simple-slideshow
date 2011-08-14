@@ -8,12 +8,17 @@ jQuery(document).ready(function($){
 		
 	$.each(simpleslider_prefs, function(k, v){
 		t_show = $('#simpleslider_show_' + k);
-		t_show.cycle({
-			timeout: 0,
+		var opts = {
+			timeout: 0, 
 			speed: v['transition_speed'],
 			next: '#simpleslider_show_' + k + '_next',
-			prev: '#simpleslider_show_' + k + '_prev',
-		});
+			prev: '#simpleslider_show_' + k + '_prev'
+		};
+		
+		if('fx' in v)
+			opts['fx'] = v['fx'];
+		
+		t_show.cycle(opts);
 		attach_counter(k, v['slides']);
 	});
 	

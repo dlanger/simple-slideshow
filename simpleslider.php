@@ -80,7 +80,8 @@ function sss_handle_shortcode( $attrs ) {
 						'link_click' => $defaults[ 'link_click' ],
 						'link_target' => $defaults[ 'link_target' ],
 						'show_counter' => $defaults[ 'show_counter' ],
-						'transition_speed' => $defaults[ 'transition_speed' ] );
+						'transition_speed' => $defaults[ 'transition_speed' ],
+						'transition' => $defaults[ 'transition']);
 	
 	extract( sss_settings_validate( shortcode_atts( $default_attrs, 
 				$attrs ) ) );
@@ -109,7 +110,10 @@ function sss_handle_shortcode( $attrs ) {
 	$resp = '<script type="text/javascript">'.
 				"simpleslider_prefs[{$slider_show_number}] = {".
 					'\'slides\' : ' . count( $images ) . ', '.
-					"'transition_speed' : ${transition_speed}};";
+					"'transition_speed' : ${transition_speed}";
+	if( 'all' == $defaults[ 'cycle_version' ])
+		$resp .= ", 'fx': '${transition}'";
+	$resp .= '};';
 	$resp .= '</script>' . "\n";
 	
 	$resp .= "<div class=\"simpleslider_show\" id=\"{$slider_show_id}\" " . 
