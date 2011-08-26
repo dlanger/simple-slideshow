@@ -51,7 +51,7 @@ Under the *Settings* section of the Administration section, on the page entitled
 = How do I make the images change faster or slower? =
 
 The slideshow will advance when the forwards/backwards arrows are clicked. If you'd like to make the transition between images
-faster or slower, you can pass attributes to the shortcode - for example, `[simple_slideshow time="1000"]`. For full documentation on this, 
+faster or slower, you can pass attributes to the shortcode - for example, `[simple_slideshow transition_speed="1000"]`. For full documentation on this, 
 check out the *Attributes* tab in the Simple Slideshow menu.
 
 = How do I change the order of images in the slideshow? =
