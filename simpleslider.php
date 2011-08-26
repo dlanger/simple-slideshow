@@ -53,8 +53,8 @@ function sss_load_externals() {
 		
 	if( $defaults[ 'cycle_version' ] == 'lite' ) 
 		wp_register_script( 'cycle', plugins_url( 
-		'jquery.cycle.lite.1.1.min.js', __FILE__ ), array( 'jquery' ), 
-		'1.1', true );
+		'jquery.cycle.lite.1.3.min.js', __FILE__ ), array( 'jquery' ), 
+		'1.3', true );
 	else 
 		wp_register_script( 'cycle', plugins_url( 
 		'jquery.cycle.all.2.88.min.js', __FILE__ ), array( 'jquery' ), 

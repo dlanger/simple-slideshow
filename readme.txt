@@ -4,7 +4,7 @@ Donate link: http://daniellanger.com/blog/simple-slideshow
 Tags: slideshow, jquery, cycle, photos, photographs
 Requires at least: 3.0
 Tested up to: 3.2
-Stable tag: 1.0.1
+Stable tag: 1.1
 
 Easily add a clean jQuery-powered slideshow to your site. Integrates well into any theme, easy to configure.
 
@@ -99,6 +99,7 @@ link decorations are all styled by the theme that's in use.
 * Added internationalization support.
 * Switched jQuery to local (from Google CDN) version.
 * Added support for using the full Cycle plugin
+* Upgraded version of Cycle Lite plugin
 
 == Upgrade Notice ==
 
@@ -106,4 +107,4 @@ link decorations are all styled by the theme that's in use.
 Initial upload to Wordpress.org.
 
 = 1.0.1 = 
-This version allows the use of all Cycle translations, as opposed to just a fade. It also adds support for internationalization.
+This version allows the use of all Cycle translations. Adds support for internationalization. Upgrades the version of Cycle Lite used to properly hide non-displayed elements and their links.
