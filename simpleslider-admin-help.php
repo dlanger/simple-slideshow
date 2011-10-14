@@ -6,7 +6,7 @@ $sss_contextual_help = <<<HELP
 <p><b>Image Size</b>: The dimensions of the images that will be used when displaying a slide show. To adjust these, go 
 to the 'Media' control panel, under 'Settings'.</p>
 
-<p><b>Transition Speed</b>: The amount of time, in miliseconds, it will take to fade between individual photos in the slideshow. For a 
+<p><b>Transition Speed</b>: The amount of time, in milliseconds, it will take to fade between individual photos in the slideshow. For a 
 quick fade, try entering 150. For a slow fade, try entering 500. Values between 10 and 1000 are valid. </p> 
 
 <p><b>Click Image</b>: If this is enabled, clicking the current sldieshow image will open a new browser window showing the 
@@ -26,6 +26,13 @@ script will be loaded, and all transitions will be available. This option is set
 <p><b>Transition Effect</b>: The effect to use when transitioning between slides. Anything that can be passed
 to the <em>fx</em> parameter of a jQuery Cycle show - listed <a href="http://jquery.malsup.com/cycle/browser.html" target="_new">here</a> - is valid.
 If <em>Cycle Version</em> is set to <em>Lite</em>, this value is locked to <em>fade</em>.
+
+<p><b>Auto-advance</b>: If this is enabled, slideshows will advance images automatically (without the user clicking the Prev/Next buttons).</p>
+
+<p><b>Auto-advance Speed</b>: If <i>auto-advance</i> is disabled for a particular slideshow, this option has no effect on that show. If <i>auto-advance</i> is 
+enabled for a particular show, this option specifies the amount of time, in milliseconds, that each image will be shown for. 
+For a leisurely slideshow, try entering 5000. Values between 1000 and 30000 are valid.</p>
+
 
 HELP;
 
@@ -130,6 +137,16 @@ Values: <code>1</code> to enable, <code>0</code> to disable
 Example: <code>[simple_slideshow transition="toss"]</code><br>
 Values: Any effect listed <a href="http://jquery.malsup.com/cycle/browser.html" target="_new">here</a>.<br>
 Note: If <em>Cycle Version</em> on the <em>Settings</em> tab is set to <em>Lite</em>, this attribute is ignored
+</p>
+
+<b>auto_advance</b> - auto advance<br>
+Example: <code>[simple_slideshow auto_advance="1"]</code><br>
+Values: <code>1</code> to enable, <code>0</code> to disable
+</p>
+
+<b>auto_advance_speed</b> - image display time<br>
+Example: <code>[simple_slideshow auto_advance="1" auto_advance_speed="5000"]</code><br>
+Values: any integer between 5000 and 30000, inclusive
 </p>
 DOC2;
 

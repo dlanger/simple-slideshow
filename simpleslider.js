@@ -12,33 +12,24 @@ jQuery(document).ready(function($){
 			timeout: 0, 
 			speed: v['transition_speed'],
 			next: '#simpleslider_show_' + k + '_next',
-			prev: '#simpleslider_show_' + k + '_prev'
+			prev: '#simpleslider_show_' + k + '_prev',
+			after: update_counter(k)
 		};
 		
 		if('fx' in v)
 			opts['fx'] = v['fx'];
 		
+		if('auto_advance_speed' in v)
+			opts['timeout'] = v['auto_advance_speed'];
+		
 		t_show.cycle(opts);
 		attach_counter(k, v['slides']);
 	});
 	
-	function attach_counter(k, slides) {
-		var curr_pic = 1;
+	function update_counter(k){
 		var count_display = $('#simpleslider_show_' + k + '_count');
-		$('#simpleslider_show_' + k + '_next').click(
-				function(){
-					curr_pic = (curr_pic == slides) ? 1 : curr_pic + 1;
-					count_display.html(curr_pic);
-					return false;
-				}
-		);
-		
-		$('#simpleslider_show_' + k + '_prev').click(
-				function(){
-					curr_pic = (curr_pic == 1) ? slides : curr_pic - 1;
-					count_display.html(curr_pic);
-					return false;
-				}
-		);
+		return function(c, n, opts){
+			count_display.html(opts.currSlide+1);
+		}
 	}
 });

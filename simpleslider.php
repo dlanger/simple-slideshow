@@ -80,7 +80,7 @@ function sss_handle_shortcode( $attrs ) {
 		$defaults = sss_settings_defaults(NULL, true);
 
 	$stored_cycle_version = $defaults[ 'cycle_version' ];
-	
+
 	// Stops a possible injection of cycle_version as shortcode argument
 	unset( $defaults[ 'cycle_version' ] );
 	extract( sss_settings_validate( shortcode_atts( $defaults, 
@@ -110,11 +110,13 @@ function sss_handle_shortcode( $attrs ) {
 	$slider_show_number = get_the_ID();
 	
 	$resp = '<script type="text/javascript">'.
-				"simpleslider_prefs[{$slider_show_number}] = {".
-					'\'slides\' : ' . count( $images ) . ', '.
+				"simpleslider_prefs[{$slider_show_number}] = {" .
+					'\'slides\' : ' . count( $images ) . ', ' .
 					"'transition_speed' : ${transition_speed}";
 	if( 'all' == $stored_cycle_version )
 		$resp .= ", 'fx': '${transition}'";
+	if( 1 == $auto_advance )
+		$resp .= ", 'auto_advance_speed': ${auto_advance_speed}";
 	$resp .= '};';
 	$resp .= '</script>' . "\n";
 	

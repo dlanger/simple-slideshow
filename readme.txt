@@ -4,7 +4,7 @@ Donate link: http://daniellanger.com/blog/simple-slideshow
 Tags: slideshow, jquery, cycle, photos, photographs
 Requires at least: 3.0
 Tested up to: 3.2
-Stable tag: 1.1
+Stable tag: 1.2
 
 Easily add a clean jQuery-powered slideshow to your site. Integrates well into any theme, easy to configure.
 
@@ -54,6 +54,12 @@ The slideshow will advance when the forwards/backwards arrows are clicked. If yo
 faster or slower, you can pass attributes to the shortcode - for example, `[simple_slideshow transition_speed="1000"]`. For full documentation on this, 
 check out the *Attributes* tab in the Simple Slideshow menu.
 
+= How do I make the images advance automatically? =
+
+You're looking for the `auto_advance` attribute. Enable it on a per-show basis with `auto_advance="1"`, and set how long you'd like each slide to be
+displayed with `auto_advance_speed`. For example, a show that auto-advances and keeps each image up for five seconds could be called by 
+`[simple_slideshow auto_advance="1" auto_advance_speed="5000"]`.
+
 = How do I change the order of images in the slideshow? =
 
 In the *media uploader*, go to the *Gallery* tab. There, drag the images up and down to put them in 
@@ -101,6 +107,10 @@ link decorations are all styled by the theme that's in use.
 * Added support for using the full Cycle plugin
 * Upgraded version of Cycle Lite plugin
 
+= 1.2 =
+* Refactored some internals
+* Added auto-advance support
+
 == Upgrade Notice ==
 
 = 1.0 =
@@ -108,3 +118,6 @@ Initial upload to Wordpress.org.
 
 = 1.0.1 = 
 This version allows the use of all Cycle translations. Adds support for internationalization. Upgrades the version of Cycle Lite used to properly hide non-displayed elements and their links.
+
+= 1.2 =
+This version support auto-advancing slideshows.

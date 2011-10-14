@@ -16,7 +16,9 @@ function sss_settings_defaults( $field, $return_all = false ){
 					'link_target' => 'direct', 
 					'show_counter' => 1, 
 					'cycle_version' => 'lite',
-					'transition' => 'fade'	
+					'transition' => 'fade',
+					'auto_advance' => 0,
+					'auto_advance_speed' => 5000	
 	);
 	if( $return_all )
 		return $defs;
@@ -56,25 +58,29 @@ function sss_settings_link_target_val( $inp ){
 }
 
 function sss_settings_transition_speed_val( $inp ){
-	$safe_inp = ( int ) $inp;
-	if( $safe_inp < 10 or $safe_inp > 1000 )
-		return sss_settings_defaults( 'transition_speed' );
-	else 
-		return $safe_inp;
+	return validate_range($inp, 'transition_speed',	10, 1000);
+}
+
+function sss_settings_auto_advance_speed_val( $inp ){
+	return validate_range($inp, 'auto_advance_speed', 1000, 30000);
 }
 
 function sss_settings_link_click_val( $inp ){
-	$safe_inp = ( int ) $inp;
-	if( $safe_inp > 1 or $safe_inp < 0)
-		return sss_settings_defaults( 'link_click' );
-	else
-		return $safe_inp;
+	return validate_bool($inp, 'link_click' );
 }
 
 function sss_settings_show_counter_val( $inp ){
+	return validate_bool( $inp, 'show_counter' );
+}
+
+function sss_settings_auto_advance_val( $inp ){
+	return validate_bool( $inp, 'auto_advance' );
+}
+
+function validate_bool( $inp, $field ){
 	$safe_inp = ( int ) $inp;
 	if( $safe_inp > 1 or $safe_inp < 0)
-		return sss_settings_defaults( 'show_counter' );
+		return sss_settings_defaults( $field );
 	else
 		return $safe_inp;
 }

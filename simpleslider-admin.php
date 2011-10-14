@@ -31,15 +31,12 @@ function sss_settings_init() {
 	add_settings_field( 'sss_transition', 'Transition effect', 
 		'sss_settings_transition', 'simple_slideshow', 
 		'sss_settings_main');
-<<<<<<< HEAD
-=======
 	add_settings_field( 'sss_auto_advance', 'Auto-advance', 
 		'sss_settings_auto_advance', 'simple_slideshow', 
 		'sss_settings_main');
 	add_settings_field( 'sss_auto_advance_speed', 'Auto-advance speed', 
 		'sss_settings_auto_advance_speed', 'simple_slideshow', 
 		'sss_settings_main');
->>>>>>> 48fa99b... Refactored shotcode default handler
 }
 
 function sss_load_menu() {
@@ -110,6 +107,34 @@ function sss_settings_transition() {
 		echo ' disabled ';
 	
 	echo '>';
+}
+
+function sss_settings_auto_advance_speed() {
+	$opts = get_option( 'sss_settings' );
+	$curr = sss_settings_defaults( 'auto_advance_speed' );
+		
+	if( $opts and isset( $opts[ 'auto_advance_speed' ] ) )
+		$curr = $opts[ 'auto_advance_speed' ];
+	echo '<input type="number" min="1000" max="30000" step="500" value="', $curr, 
+			'" id="sss_auto_advance_speed" ',
+			'name="sss_settings[auto_advance_speed]">';
+}
+
+function sss_settings_auto_advance() {
+	$opts = get_option( 'sss_settings' );
+	$curr = sss_settings_defaults( 'auto_advance' );
+		
+	if( $opts and isset( $opts[ 'auto_advance' ] ) )
+		$curr = $opts[ 'auto_advance' ];
+	
+	echo '<select id="sss_auto_advance" name="sss_settings[auto_advance]">',
+			'<option ';
+	if( ! $curr )
+		echo 'selected ';
+	echo 'value="0">Disabled</option><option ';
+	if( $curr )
+		echo 'selected ';
+	echo 'value="1">Enabled</option></select>';	
 }
 
 function sss_settings_link_click() {
