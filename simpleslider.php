@@ -85,7 +85,7 @@ function sss_handle_shortcode( $attrs ) {
 	unset( $defaults[ 'cycle_version' ] );
 	extract( sss_settings_validate( shortcode_atts( $defaults, 
 				$attrs ) ) );
-	
+				
 	$images =& get_children( 'post_type=attachment&post_mime_type=' .
 								'image&post_parent=' . get_the_ID() .
 								'&orderby=menu_order&order=ASC' ); 	
@@ -111,7 +111,7 @@ function sss_handle_shortcode( $attrs ) {
 				"simpleslider_prefs[{$slider_show_number}] = {".
 					'\'slides\' : ' . count( $images ) . ', '.
 					"'transition_speed' : ${transition_speed}";
-	if( 'all' == $defaults[ 'cycle_version' ])
+	if( 'all' == $stored_cycle_version )
 		$resp .= ", 'fx': '${transition}'";
 	$resp .= '};';
 	$resp .= '</script>' . "\n";

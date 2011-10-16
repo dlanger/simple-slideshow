@@ -31,6 +31,15 @@ function sss_settings_init() {
 	add_settings_field( 'sss_transition', 'Transition effect', 
 		'sss_settings_transition', 'simple_slideshow', 
 		'sss_settings_main');
+<<<<<<< HEAD
+=======
+	add_settings_field( 'sss_auto_advance', 'Auto-advance', 
+		'sss_settings_auto_advance', 'simple_slideshow', 
+		'sss_settings_main');
+	add_settings_field( 'sss_auto_advance_speed', 'Auto-advance speed', 
+		'sss_settings_auto_advance_speed', 'simple_slideshow', 
+		'sss_settings_main');
+>>>>>>> 48fa99b... Refactored shotcode default handler
 }
 
 function sss_load_menu() {
