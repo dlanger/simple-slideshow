@@ -85,6 +85,8 @@ function sss_handle_shortcode( $attrs ) {
 	unset( $defaults[ 'cycle_version' ] );
 	extract( sss_settings_validate( shortcode_atts( $defaults, 
 				$attrs ) ) );
+	// Will always be 'lite' (so wrong) - use $stored_cycle_version instead
+	unset( $cycle_version );
 				
 	$images =& get_children( 'post_type=attachment&post_mime_type=' .
 								'image&post_parent=' . get_the_ID() .
