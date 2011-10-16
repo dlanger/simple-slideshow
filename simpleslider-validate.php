@@ -24,13 +24,6 @@ function sss_settings_defaults( $field, $return_all = false ){
 		return $defs[ $field ];
 }
 
-function sss_settings_cycle_version_val( $inp ){
-	if( $inp == 'lite' or $inp == 'all' )
-		return $inp;
-	else 
-		return sss_settings_defaults( 'cycle_version' );
-}
-
 function sss_settings_transition_val( $inp ){
 	// Validity of transition depends on the value of cycle_type
 	// (if cycle_type == 'lite', the only valid value for 
@@ -50,10 +43,16 @@ function sss_settings_transition_val( $inp ){
 }
 
 function sss_settings_size_val( $inp ){
-	if( in_array( $inp, get_intermediate_image_sizes() ) )
-		return $inp;
-	else 
-		return sss_settings_defaults( 'size' ); 
+	return validate_in_list( $inp, 'size', get_intermediate_image_sizes() );
+}
+
+function sss_settings_cycle_version_val( $inp ){
+	return validate_in_list( $inp, 'cycle_version', array( 'lite', 'all' ) );
+}
+
+function sss_settings_link_target_val( $inp ){
+	return validate_in_list( $inp, 'link_target', 
+		array( 'direct', 'attach' ) );
 }
 
 function sss_settings_transition_speed_val( $inp ){
@@ -80,11 +79,19 @@ function sss_settings_show_counter_val( $inp ){
 		return $safe_inp;
 }
 
-function sss_settings_link_target_val( $inp ){
-	if( $inp == 'direct' or $inp == 'attach' )
+function validate_in_list( $inp, $field, $options ){
+	if( in_array( $inp, $options, true ) )
 		return $inp;
 	else 
-		return sss_settings_defaults( 'link_target' );
+		return sss_settings_defaults( $field ); 
+}
+
+function validate_range( $inp, $field, $minval, $maxval ){
+	$safe_inp = ( int ) $inp;
+	if( $safe_inp < $minval or $safe_inp > $maxval )
+		return sss_settings_defaults( $field );
+	else 
+		return $safe_inp;
 }
 
 ?>

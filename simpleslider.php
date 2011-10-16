@@ -79,14 +79,11 @@ function sss_handle_shortcode( $attrs ) {
 	if( ! $defaults ) 
 		$defaults = sss_settings_defaults(NULL, true);
 
-	$default_attrs =  array( 'size' => $defaults[ 'size' ],
-						'link_click' => $defaults[ 'link_click' ],
-						'link_target' => $defaults[ 'link_target' ],
-						'show_counter' => $defaults[ 'show_counter' ],
-						'transition_speed' => $defaults[ 'transition_speed' ],
-						'transition' => $defaults[ 'transition' ]);
+	$stored_cycle_version = $defaults[ 'cycle_version' ];
 	
-	extract( sss_settings_validate( shortcode_atts( $default_attrs, 
+	// Stops a possible injection of cycle_version as shortcode argument
+	unset( $defaults[ 'cycle_version' ] );
+	extract( sss_settings_validate( shortcode_atts( $defaults, 
 				$attrs ) ) );
 	
 	$images =& get_children( 'post_type=attachment&post_mime_type=' .
