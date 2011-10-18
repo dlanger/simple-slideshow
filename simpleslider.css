@@ -8,6 +8,11 @@
 	margin: 10px auto;
 	text-align: center; 
 	font-size: 0.75em; 	
+	width: 100%;
+}
+
+.simpleslider_counter {
+	display: inline;
 }
 
 .simpleslider_show {

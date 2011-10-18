@@ -153,19 +153,19 @@ function sss_handle_shortcode( $attrs ) {
 	
 	// Controls
 	if ( true == $show_counter ) 
-		$image_counter = "<span id=\"{$slider_show_id}_count\">1</span>" . 
-							'/' . count($images);
+		$image_counter = '<div class="simpleslider_counter"><span ' .
+							"id=\"{$slider_show_id}" .
+							'_count">1</span>/' . count($images) . '</div>';
 	else
 		$image_counter = '';	
 	
-	$resp .= "<div style=\"width: {$thumb_w}px; \" " .
-				"class=\"simpleslider_controls\">";
+	$resp .= '<div class="simpleslider_controls">';
 	$resp .= "<a href=\"#\" id=\"{$slider_show_id}_prev\" " . 
-				"title=\"Previous Image\" class=\"simpleslider_link\">◄ " . 
+				"title=\"Previous Image\" class=\"simpleslider_link prev\">◄ " . 
 				__( 'Prev.', 'simple_slideshow' ) . "</a> " .
 				"&nbsp; ${image_counter} " . 
 				"&nbsp; <a href=\"#\" id=\"{$slider_show_id}_next\" " .
-				"title=\"Next Image\" class=\"simpleslider_link\">" .
+				"title=\"Next Image\" class=\"simpleslider_link next\">" .
 				__( 'Next', 'simple_slideshow' ) . " ►</a>";
 	$resp .= "</div>\n";
 	

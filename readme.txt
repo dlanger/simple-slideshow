@@ -110,6 +110,7 @@ link decorations are all styled by the theme that's in use.
 = 1.2 =
 * Refactored some internals
 * Added auto-advance support
+* Controls are now their own CSS classes (thanks to ThomasBuxo)
 
 == Upgrade Notice ==
 
@@ -120,4 +121,4 @@ Initial upload to Wordpress.org.
 This version allows the use of all Cycle translations. Adds support for internationalization. Upgrades the version of Cycle Lite used to properly hide non-displayed elements and their links.
 
 = 1.2 =
-This version support auto-advancing slideshows.
+This version support auto-advancing slideshows, as well as improved internals and more customizable CSS.
