@@ -23,7 +23,6 @@ jQuery(document).ready(function($){
 			opts['timeout'] = v['auto_advance_speed'];
 		
 		t_show.cycle(opts);
-		attach_counter(k, v['slides']);
 	});
 	
 	function update_counter(k){
