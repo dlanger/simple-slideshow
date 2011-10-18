@@ -100,12 +100,14 @@ function sss_handle_shortcode( $attrs ) {
 	// Figure out the maximum size of the images being displayed so we can 
 	// set the smallest possible fixed-size container to cycle in.
 	$thumb_w = $thumb_h = 0;
+	$captions = array();
 	foreach ( $images as $image_id => $image_data ) {
 		$info = wp_get_attachment_metadata( $image_id );
 		$thumb_w = max ( $thumb_w, $info[ 'sizes' ][ $size ][ 'width' ] );
 		$thumb_h = max ( $thumb_h, $info[ 'sizes' ][ $size ][ 'height' ] );
+		$captions[ $image_id ] = $image_data->post_excerpt;
 	}
-	
+
 	$slider_show_id = 'simpleslider_show_' . get_the_ID();
 	$slider_show_number = get_the_ID();
 	
@@ -127,7 +129,11 @@ function sss_handle_shortcode( $attrs ) {
 	foreach ( $images as $image_id => $image_data ) {
 		$opacity = $first ? '1' : '0'; 
 		$first = false;
-		$image_tag = wp_get_attachment_image( $image_id, $size );
+		$image_prop = wp_get_attachment_image_src( $image_id, $size );
+		$image_tag = "<img src=\"${image_prop[ 0 ]}\" " .
+						"width=\"${image_prop[ 1 ]}\" " .
+						"height=\"${image_prop[ 2 ]}\" " .
+						"alt=\"${captions[ $image_id ]}\">"; 
 		
 		$resp .= "<div style=\"opacity: {$opacity}\">";
 						

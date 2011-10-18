@@ -1,10 +1,6 @@
 simpleslider_prefs = {};
 
 jQuery(document).ready(function($){
-	
-	$('.simpleslider_image_link').each(function(){
-		$(this).children().removeAttr('title');
-	});
 		
 	$.each(simpleslider_prefs, function(k, v){
 		t_show = $('#simpleslider_show_' + k);
