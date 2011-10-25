@@ -3,7 +3,7 @@ Contributors: dlanger
 Donate link: http://daniellanger.com/blog/simple-slideshow
 Tags: slideshow, jquery, cycle, photos, photographs
 Requires at least: 3.0
-Tested up to: 3.2
+Tested up to: 3.2.1
 Stable tag: 1.2
 
 Easily add a clean jQuery-powered slideshow to your site. Integrates well into any theme, easy to configure.
@@ -57,8 +57,7 @@ check out the *Attributes* tab in the Simple Slideshow menu.
 = How do I make the images advance automatically? =
 
 You're looking for the `auto_advance` attribute. Enable it on a per-show basis with `auto_advance="1"`, and set how long you'd like each slide to be
-displayed with `auto_advance_speed`. For example, a show that auto-advances and keeps each image up for five seconds could be called by 
-`[simple_slideshow auto_advance="1" auto_advance_speed="5000"]`.
+displayed with `auto_advance_speed`. For example, a show that auto-advances and keeps each image up for five seconds could be called by `[simple_slideshow auto_advance="1" auto_advance_speed="5000"]`.
 
 = How do I change the order of images in the slideshow? =
 
@@ -74,7 +73,7 @@ your users. If you're looking for a fancier image transition, you'll need to loa
 
 = How do I use fancier image transitions? = 
 
-If you'd like to use one of the transitions listed (here)[http://jquery.malsup.com/cycle/browser.html], all you have to do
+If you'd like to use one of the transitions listed [here](http://jquery.malsup.com/cycle/browser.html), all you have to do
 is set the *Cycle Version* option (in the *Settings* menu) to *All*. Then you can set the transition effect like any other option - 
 set a default one on the *Settings* menu, and then customize it on a per-slideshow basis if you'd like.  
 
@@ -109,7 +108,7 @@ link decorations are all styled by the theme that's in use.
 
 = 1.2 =
 * Refactored some internals
-* Added auto-advance support
+* Added auto-advancing slideshow support
 * Controls are now their own CSS classes (thanks to ThomasBuxo)
 
 == Upgrade Notice ==
@@ -117,8 +116,8 @@ link decorations are all styled by the theme that's in use.
 = 1.0 =
 Initial upload to Wordpress.org.
 
-= 1.0.1 = 
+= 1.1 = 
 This version allows the use of all Cycle translations. Adds support for internationalization. Upgrades the version of Cycle Lite used to properly hide non-displayed elements and their links.
 
 = 1.2 =
-This version support auto-advancing slideshows, as well as improved internals and more customizable CSS.
+This version supports auto-advancing slideshows, as well as improved internals and more customizable CSS.
