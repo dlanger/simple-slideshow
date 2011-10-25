@@ -84,7 +84,7 @@ function sss_handle_shortcode( $attrs ) {
 	// Stops a possible injection of cycle_version as shortcode argument
 	unset( $defaults[ 'cycle_version' ] );
 	extract( sss_settings_validate( shortcode_atts( $defaults, 
-				$attrs ) ) );
+				$attrs), true ) );
 	// Will always be 'lite' (so wrong) - use $stored_cycle_version instead
 	unset( $cycle_version );
 				
@@ -114,7 +114,7 @@ function sss_handle_shortcode( $attrs ) {
 	$resp = '<script type="text/javascript">'.
 				"simpleslider_prefs[{$slider_show_number}] = {" .
 					'\'slides\' : ' . count( $images ) . ', ' .
-					"'transition_speed' : ${transition_speed}";
+					"'transition_speed': ${transition_speed}";
 	if( 'all' == $stored_cycle_version )
 		$resp .= ", 'fx': '${transition}'";
 	if( 1 == $auto_advance )
