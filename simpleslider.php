@@ -96,7 +96,14 @@ function sss_handle_shortcode( $attrs ) {
 	// images to display.
 	if( empty($images) ) 
 		return '';
-		
+			
+	if( !empty($attrs['exclude']) ) {
+		$exclude = explode(',', $attrs['exclude']);
+		foreach ($exclude as $image_id) {
+			unset($images[trim($image_id)]);
+		}
+	}
+	
 	// Figure out the maximum size of the images being displayed so we can 
 	// set the smallest possible fixed-size container to cycle in.
 	$thumb_w = $thumb_h = 0;
