@@ -25,6 +25,9 @@ function sss_settings_init() {
 	add_settings_field( 'sss_show_counter', 'Show image counter', 
 		'sss_settings_show_counter', 'simple_slideshow', 
 		'sss_settings_main');
+	add_settings_field( 'sss_show_controls', 'Show image controls', 
+		'sss_settings_show_controls', 'simple_slideshow', 
+		'sss_settings_main');
 	add_settings_field( 'sss_cycle_version', 'Cycle version', 
 		'sss_settings_cycle_version', 'simple_slideshow', 
 		'sss_settings_main');
@@ -195,6 +198,23 @@ function sss_settings_show_counter() {
 		$curr = $opts[ 'show_counter' ];
 	
 	echo '<select id="sss_show_counter" name="sss_settings[show_counter]">',
+			'<option ';
+	if( ! $curr )
+		echo 'selected ';
+	echo 'value="0">No</option><option ';
+	if( $curr )
+		echo 'selected ';
+	echo 'value="1">Yes</option></select>';	
+}
+
+function sss_settings_show_controls() {
+	$opts = get_option( 'sss_settings' );
+	$curr = sss_settings_defaults( 'show_controls' );
+		
+	if( $opts and isset( $opts[ 'show_controls' ] ) )
+		$curr = $opts[ 'show_controls' ];
+	
+	echo '<select id="sss_show_controls" name="sss_settings[show_controls]">',
 			'<option ';
 	if( ! $curr )
 		echo 'selected ';
