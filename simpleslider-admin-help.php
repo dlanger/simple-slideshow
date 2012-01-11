@@ -133,6 +133,11 @@ Example: <code>[simple_slideshow show_counter="1"]</code><br>
 Values: <code>1</code> to enable, <code>0</code> to disable
 </p>
 
+<b>show_controls</b> - image controls<br>
+Example: <code>[simple_slideshow show_controls="1"]</code><br>
+Values: <code>1</code> to enable, <code>0</code> to disable
+</p>
+
 <b>transition</b> - transition effect<br>
 Example: <code>[simple_slideshow transition="toss"]</code><br>
 Values: Any effect listed <a href="http://jquery.malsup.com/cycle/browser.html" target="_new">here</a>.<br>

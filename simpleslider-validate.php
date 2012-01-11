@@ -29,6 +29,7 @@ function sss_settings_defaults( $field, $return_all = false ){
 					'link_click' => 0,
 					'link_target' => 'direct', 
 					'show_counter' => 1, 
+					'show_controls' => 1, 
 					'cycle_version' => 'lite',
 					'transition' => 'fade',
 					'auto_advance' => 0,
@@ -92,6 +93,9 @@ function sss_settings_link_click_val( $inp, $user_default = false ){
 
 function sss_settings_show_counter_val( $inp, $user_default = false ){
 	return validate_bool( $inp, 'show_counter', $user_default );
+}
+function sss_settings_show_controls_val( $inp, $user_default = false ){
+	return validate_bool( $inp, 'show_controls', $user_default );
 }
 
 function sss_settings_auto_advance_val( $inp, $user_default = false ){
