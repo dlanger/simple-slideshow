@@ -102,9 +102,9 @@ function sss_handle_shortcode( $attrs ) {
 	$thumb_w = $thumb_h = 0;
 	$captions = array();
 	foreach ( $images as $image_id => $image_data ) {
-		$info = wp_get_attachment_metadata( $image_id );
-		$thumb_w = max ( $thumb_w, $info[ 'sizes' ][ $size ][ 'width' ] );
-		$thumb_h = max ( $thumb_h, $info[ 'sizes' ][ $size ][ 'height' ] );
+		$image_props[ $image_id ] = wp_get_image_src( $image_id, $size );
+		$thumb_w = max ( $thumb_w, $image_props[ $image_id ][ 1 ] );
+		$thumb_h = max ( $thumb_h, $image_props[ $image_id ][ 2 ] );
 		$captions[ $image_id ] = $image_data->post_excerpt;
 	}
 
@@ -129,7 +129,7 @@ function sss_handle_shortcode( $attrs ) {
 	foreach ( $images as $image_id => $image_data ) {
 		$opacity = $first ? '1' : '0'; 
 		$first = false;
-		$image_prop = wp_get_attachment_image_src( $image_id, $size );
+		$image_prop = $image_props[ $image_id ];
 		$image_tag = "<img src=\"${image_prop[ 0 ]}\" " .
 						"width=\"${image_prop[ 1 ]}\" " .
 						"height=\"${image_prop[ 2 ]}\" " .
