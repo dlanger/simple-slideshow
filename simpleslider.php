@@ -102,7 +102,7 @@ function sss_handle_shortcode( $attrs ) {
 	$thumb_w = $thumb_h = 0;
 	$captions = array();
 	foreach ( $images as $image_id => $image_data ) {
-		$image_props[ $image_id ] = wp_get_image_src( $image_id, $size );
+		$image_props[ $image_id ] = wp_get_attachment_image_src( $image_id, $size );
 		$thumb_w = max ( $thumb_w, $image_props[ $image_id ][ 1 ] );
 		$thumb_h = max ( $thumb_h, $image_props[ $image_id ][ 2 ] );
 		$captions[ $image_id ] = $image_data->post_excerpt;
