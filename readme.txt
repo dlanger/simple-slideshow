@@ -111,6 +111,10 @@ link decorations are all styled by the theme that's in use.
 * Added auto-advancing slideshow support
 * Controls are now their own CSS classes (thanks to ThomasBuxo)
 
+= 1.3 =
+* Sizing (image vs. DIV) bug fixed (thanks to kitchin)
+* Supports exclude filter to match Gallery shortcode and hiding of controls (thanks to robcolburn) 
+
 == Upgrade Notice ==
 
 = 1.0 =
@@ -121,3 +125,6 @@ This version allows the use of all Cycle translations. Adds support for internat
 
 = 1.2 =
 This version supports auto-advancing slideshows, as well as improved internals and more customizable CSS.
+
+= 1.3 = 
+In this version, the size of the containing div is much more accurate, removing problems some users had with too much whitespace. Support for excluding certain images, as well as hiding the controls, is added.

@@ -94,17 +94,18 @@ function sss_handle_shortcode( $attrs ) {
 								'image&post_parent=' . get_the_ID() .
 								'&orderby=menu_order&order=ASC' );
 	
-								
+	print_r(shortcode_atts( $defaults, 
+				$attrs));			
 	
 	// Don't load anything or start processing if there are no 
 	// images to display.
 	if( empty($images) ) 
 		return '';
 		
-	if( !empty($attrs['exclude']) ) {
-		$exclude = explode(',', $attrs['exclude']);
-		foreach ($exclude as $image_id) {
-			unset($images[trim($image_id)]);
+	if( ! empty( $attrs[ 'exclude' ] ) ) {
+		$exclude = explode(',', $attrs[ 'exclude' ]);
+		foreach ( $exclude as $image_id ) {
+			unset( $images[ trim( $image_id ) ] );
 		}
 	}
 	
@@ -152,29 +153,30 @@ function sss_handle_shortcode( $attrs ) {
 	}	
 	
 	$resp .= "</div>\n";
+		
+	if ( true == $show_counter ) 
+		$image_counter = '<div class="simpleslider_counter"><span ' .
+							"id=\"{$slider_show_id}" .
+							'_count">1</span>/' . count($images) . '</div>';
+	else
+		$image_counter = '';	
 	
-	// Controls
-	if ( true == $show_controls )  {
-		$resp .= "\n".'<div class="simpleslider_controls">';
+	$resp .= '<div class="simpleslider_controls">';
+	
+	if ( true == $show_controls )
 		$resp .= "<a href=\"#\" id=\"{$slider_show_id}_prev\" " . 
 					"title=\"Previous Image\" class=\"simpleslider_link prev\">◄ " . 
-					__( 'Prev.', 'simple_slideshow' ) . "</a> ";
-					
-		if ( true == $show_counter ) {
-			$resp .= '&nbsp; <div class="simpleslider_counter"><span id="' . 
-						$slider_show_id . '_count">1</span>/' . count($images) . '</div>';
-		}
-		
-		$resp .= "&nbsp; <a href=\"#\" id=\"{$slider_show_id}_next\" " . 
-					"title=\"Next Image\" class=\"simpleslider_link next\">" . 
+					__( 'Prev.', 'simple_slideshow' ) . "</a> " .
+					"&nbsp;"; 
+				
+	$resp .= ${image_counter};
+				
+	if ( true == $show_controls)
+		$resp .= "&nbsp; <a href=\"#\" id=\"{$slider_show_id}_next\" " .
+					"title=\"Next Image\" class=\"simpleslider_link next\">" .
 					__( 'Next', 'simple_slideshow' ) . " ►</a>";
-		$resp .= '</div>';
-		
-	} elseif ( true == $show_counter ) {
-		$resp .= "\n".'<div class="simpleslider_counter"><span id="' . 
-					$slider_show_id . '_count">1</span>/' . count($images) . 
-					'</div>';
-	}
+					
+	$resp .= "</div>\n";
 	
 	
 	// JavaScript
